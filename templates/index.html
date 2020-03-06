@@ -1,0 +1,1394 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="{{ SITE_KEY}}">
+    <meta name="description" content="{{ SITE_DESC }}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>{{ SITE_NAME }}</title>
+    <link rel="icon" type="image/png" href="https://image.3001.net/images/20191031/15724874583730.png">
+
+    <link rel="stylesheet" type="text/css" href="https://html.sqlsec.com/all.css">
+    <link rel="stylesheet" type="text/css" href="https://html.sqlsec.com/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="https://html.sqlsec.com/aos.css">
+    <link rel="stylesheet" type="text/css" href="https://html.sqlsec.com/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="https://html.sqlsec.com/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/matery.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/my.css' %}">
+
+    <script src="https://html.sqlsec.com/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="{% static 'css/prism-a11y-dark.css' %}" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="https://image.3001.net/images/20191031/15724874583730.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">国光</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/ggs/Web/" class="waves-effect waves-light">
+      
+      <i class="fab fa-internet-explorer" style="zoom: 0.6;"></i>
+      
+      <span>Web</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/ggs/CTF/" class="waves-effect waves-light">
+      
+      <i class="far fa-flag" style="zoom: 0.6;"></i>
+      
+      <span>CTF</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/ggs/Python/" class="waves-effect waves-light">
+      
+      <i class="fab fa-python" style="zoom: 0.6;"></i>
+      
+      <span>Python</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/ggs/Others/" class="waves-effect waves-light">
+      
+      <i class="fas fa-align-left" style="zoom: 0.6;"></i>
+      
+      <span>Others</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="http://ctf.njupt.edu.cn/members" target="_blank" rel="noopener" class="waves-effect waves-light">
+      
+      <i class="fab fa-xing" style="zoom: 0.6;"></i>
+      
+      <span>X1cT34m</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends/" class="waves-effect waves-light">
+      
+      <i class="fab fa-ravelry" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about/" class="waves-effect waves-light">
+      
+      <i class="fab fa-gg" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="https://image.3001.net/images/20191031/15724874583730.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">国光</div>
+        <div class="logo-desc">
+            
+            白帽子国光的信息安全学习记录博客
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/ggs/Web/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fab fa-internet-explorer"></i>
+			
+			Web
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/ggs/CTF/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw far fa-flag"></i>
+			
+			CTF
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/ggs/Python/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fab fa-python"></i>
+			
+			Python
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/ggs/Others/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-align-left"></i>
+			
+			Others
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="http://ctf.njupt.edu.cn/members" target="_blank" rel="noopener" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fab fa-xing"></i>
+			
+			X1cT34m
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fab fa-ravelry"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fab fa-gg"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+<style>
+    .carousel-control {
+        width: 45px;
+        height: 45px;
+        line-height: 55px;
+        border-radius: 45px;
+        background: transparent;
+        cursor: pointer;
+        z-index: 100;
+    }
+
+    #prev-cover {
+        position: absolute;
+        top: 48%;
+        left: 8px;
+    }
+
+    #next-cover {
+        position: absolute;
+        top: 48%;
+        right: 8px;;
+    }
+
+    #prev-cover i {
+        margin-right: 3px;
+    }
+
+    #next-cover i {
+        margin-left: 3px;
+    }
+
+    .carousel-control:hover {
+        background-color:rgba(0, 0, 0, .4);
+    }
+
+    .carousel-control i {
+        color: #fff;
+        font-size: 2.4rem;
+    }
+    
+    html, body {
+        height:100%;
+    }
+
+    #page {
+        height:100%;
+        min-height: 100%;
+        width:100%;
+    }
+</style>
+
+
+
+<div id="page" class="carousel carousel-slider center index-cover" data-indicators="true" style="margin-top: -64px;">
+    
+
+    <div class="carousel-item red white-text bg-cover about-cover">
+        <div class="container" style="right: 0px;left: 0px;">
+            <div class="row">
+    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
+        <div class="brand">
+            <div class="title center-align">
+                
+                信息安全学习记录
+                
+            </div>
+
+            <div class="description center-align">
+                
+                <span id="typed"></span>
+                <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.9"></script>
+                <script>
+                    var typed = new Typed("#typed", {
+                        strings: ['{{ SITE_TYPE_CHINESE }}', '{{ SITE_TYPE_ENGLISH }}'],
+                        startDelay: 300,
+                        typeSpeed: 100,
+                        loop: true,
+                        backSpeed: 50,
+                        showCursor: true
+                    });
+                </script>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    // 每天切换 banner 图.  Switch banner image every day.
+    $('.bg-cover').css('background-image', 'url({% static "medias/banner/" %}' + new Date().getDay() + '.jpg)');
+</script>
+
+
+
+            <div class="cover-btns">
+                <a href="#indexCard" class="waves-effect waves-light btn">
+                    <i class="fas fa-angle-double-down"></i>开始阅读
+                </a>
+
+                
+            </div>
+            <div class="cover-social-link">
+
+
+    <a href="mailto:{{ SITE_MAIL }}" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+    <a href="http://www.sqlsec.com/baidusitemap.xml" class="tooltipped" target="_blank" data-tooltip="网站的SiteMap: http://www.sqlsec.com/baidusitemap.xml" data-position="top" data-delay="50">
+        <i class="fas fa-sitemap"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+    <a href="/avs/" class="tooltipped" target="_blank" data-tooltip="文章更新动态" data-position="top" data-delay="50">
+        <i class="far fa-calendar-alt"></i>
+    </a>
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script>
+$(function () {
+    let coverSlider = $('.carousel');
+    coverSlider.carousel({
+        duration: Number('120'),
+        fullWidth: true,
+        indicators: 'false' === 'true'
+    });
+
+    let carouselIntervalId;
+    
+
+    let restartPlay = function () {
+        
+    };
+
+    
+});
+</script>
+
+
+
+<main class="content">
+
+    
+    <div id="indexCard" class="index-card">
+        <div class="container ">
+            <div class="card">
+                <div class="card-content">
+                    
+                        <div class="dream">
+    
+    <div class="title center-align">
+        <i class="far fa-lightbulb"></i>&nbsp;&nbsp;宁静致远
+    </div>
+    
+    <div class="row">
+        <div class="col l8 offset-l2 m10 offset-m1 s10 offset-s1 center-align text">
+            __画船听雨：你看得到我打在屏幕上的字，看不到我落在键盘上的泪。  Kali Linux：The quieter you become, the more you are able to hear.  冰心：成功的花，人们只惊羡她现时的明艳！然而当初她的芽儿，浸透了奋斗的泪泉，洒遍了牺牲的血雨。
+        </div>
+    </div>
+</div>
+                    
+
+                    
+
+                    
+
+                    <div id="recommend-sections" class="recommend">
+                        
+
+
+
+
+
+<div class="title"><i class="far fa-thumbs-up"></i>&nbsp;&nbsp;推荐文章</div>
+
+<div class="row">
+
+    
+    
+    <div class="col s12 m6" >
+        <div class="post-card" style="background-image: url('https://image.3001.net/images/20200122/15796972174008.jpg')">
+            <div class="post-body">
+                <div class="post-categories">
+                    
+                    <a href="/ggs/Web/" class="category">Web</a>
+                    
+                </div>
+                <a href="/2020/01/sinsiu.html">
+                    <h3 class="post-title">PHP代码审计初次尝试之新秀企业网站系统</h3>
+                </a>
+                <p class="post-description">
+                    
+                        国光的初次代码审计尝试，先找个小点的CMS练练手入门一下，顺便记录一下水一篇文章，233333 嗝
+
+
+系统介绍CMS名称：新秀企业网站系统
+                    
+                </p>
+                <a href="/2020/01/sinsiu.html" class="read-more btn waves-effect waves-light" style="background: linear-gradient(to right, #FF5E3A 0%, #FF2A68 100%)" target="_blank">
+                    <i class="icon far fa-eye fa-fw"></i>阅读更多
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="col s12 m6" >
+        <div class="post-card" style="background-image: url('https://dn-coding-net-tweet.codehub.cn/photo/2019/f2c800d3-2ffd-4a59-b23c-9f8b49d08776.jpg')">
+            <div class="post-body">
+                <div class="post-categories">
+                    
+                    <a href="/ggs/Others/" class="category">Others</a>
+                    
+                </div>
+                <a href="/2019/11/winhash.html">
+                    <h3 class="post-title">Windows用户密码的加密方法与破解</h3>
+                </a>
+                <p class="post-description">
+                    
+                        再研究Hastcat的时候涉及到了Windows的Hash破解，感觉这个地方还是有一些姿势点和细节的，特此写文章记录之。
+ 
+
+Hash简介
+                    
+                </p>
+                <a href="/2019/11/winhash.html" class="read-more btn waves-effect waves-light" style="background: linear-gradient(to right, #EF4DB6 0%, #C643FC 100%)" target="_blank">
+                    <i class="icon far fa-eye fa-fw"></i>阅读更多
+                </a>
+            </div>
+        </div>
+    </div>
+    
+
+</div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    
+
+    <!-- 所有文章卡片 -->
+    <article id="articles" class="container articles">
+        <div class="row article-row">
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2020/03/django.html">
+                        <div class="card-image">
+                            
+                            <img src="https://image.3001.net/images/20200304/15832956271308.jpg" class="responsive-img" alt="Django3 学习记录笔记">
+                            
+                            <span class="card-title">Django3 学习记录笔记</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                  
+Django是一个文档很全的框架，学习的时候老是遇到一些坑，这里就顺便记录一下，以便后面使用，同时也希望本文可以帮助到其他的朋友。
+
+
+开发环境操作系统：macOS Cataline 10.15.3 
+Python：pyenv 安装的
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-04
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/ggs/Python/" class="post-category">
+                                    Python
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/Python/">
+                            <span class="chip tag-color">Python</span>
+                        </a>
+                        
+                        <a href="/tags/Django/">
+                            <span class="chip tag-color">Django</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2020/01/sinsiu.html">
+                        <div class="card-image">
+                            
+                            <img src="https://image.3001.net/images/20200122/15796972174008.jpg" class="responsive-img" alt="PHP代码审计初次尝试之新秀企业网站系统">
+                            
+                            <span class="card-title">PHP代码审计初次尝试之新秀企业网站系统</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                国光的初次代码审计尝试，先找个小点的CMS练练手入门一下，顺便记录一下水一篇文章，233333 嗝
+
+
+系统介绍CMS名称：新秀企业网站系统PHP版
+官网：www.sinsiu.com
+版本：这里国光用的1.0 正式版 （官网最新的版本有毒
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-01-21
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/ggs/Web/" class="post-category">
+                                    Web
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/PHP/">
+                            <span class="chip tag-color">PHP</span>
+                        </a>
+                        
+                        <a href="/tags/%E5%AE%A1%E8%AE%A1/">
+                            <span class="chip tag-color">审计</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2020/01/xss.html">
+                        <div class="card-image">
+                            
+                            <img src="https://image.3001.net/images/20200109/15785735953172.jpg" class="responsive-img" alt="XSS从零开始">
+                            
+                            <span class="card-title">XSS从零开始</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                XSS接触到现在也有不少时间了，但是以前却很少结合源码去分析为什么可以绕过，导致对XSS的理解很难更上一层楼，再加上网上相关的文章也零零散散，所以就有了系统的写一篇XSS文章的想法，本文会结合一些源码去分析XSS漏洞产生的原因。
+
+
+前言这
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-01-09
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/ggs/Web/" class="post-category">
+                                    Web
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/XSS/">
+                            <span class="chip tag-color">XSS</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2019/12/aliyun.html">
+                        <div class="card-image">
+                            
+                            <img src="https://image.3001.net/images/20191225/15772760782987.jpg" class="responsive-img" alt="阿里云虚拟主机搭建多个网站">
+                            
+                            <span class="card-title">阿里云虚拟主机搭建多个网站</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                网站搭建有3年多了，一直没有备案，最近备案成功，网站可以愉快地搭建在国内了，由于经费有限只能用得起阿里云虚拟主机，本文主要记录阿里云虚拟主机的基本建站操作。
+
+
+域名绑定因为阿里云虚拟主机支持一个主机绑定多个域名，绑定后域名需解析生效，备案
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-12-25
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/ggs/Others/" class="post-category">
+                                    Others
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/%E5%BB%BA%E7%AB%99/">
+                            <span class="chip tag-color">建站</span>
+                        </a>
+                        
+                        <a href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91/">
+                            <span class="chip tag-color">阿里云</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2019/12/pyenv.html">
+                        <div class="card-image">
+                            
+                            <img src="https://image.3001.net/images/20191217/15765523056136.jpg" class="responsive-img" alt="macOS pyenv入门使用记录">
+                            
+                            <span class="card-title">macOS pyenv入门使用记录</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                有时候开发需要在不同版本的Python中切换，这个时候就需要神器pyenv来简化我们的操作了。下面国光就来简单介绍一下入门操作，大道至简。
+
+
+前言我们可以经常会问 Python2 还是 Pyton3 ？？或者Python 3.6 还是 P
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-12-17
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/ggs/Python/" class="post-category">
+                                    Python
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/%E7%A5%9E%E5%99%A8/">
+                            <span class="chip tag-color">神器</span>
+                        </a>
+                        
+                        <a href="/tags/Python/">
+                            <span class="chip tag-color">Python</span>
+                        </a>
+                        
+                        <a href="/tags/%E7%8E%AF%E5%A2%83/">
+                            <span class="chip tag-color">环境</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2019/12/pd.html">
+                        <div class="card-image">
+                            
+                            <img src="https://image.3001.net/images/20191216/15765034087120.jpeg" class="responsive-img" alt="Parallel Tools 高版本内核的安装失败的解决方法">
+                            
+                            <span class="card-title">Parallel Tools 高版本内核的安装失败的解决方法</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                Parallesl Desktop 个人认为它是macOS平台上最强大的一个虚拟机软件，国光曾经用这个虚拟机甚至可以流畅的打守望先锋，不过随着一些高版本的Linux内核的发行，PD Tools的安装可能并不是那么顺利。
+
+
+前言最近Kali
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-12-16
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/ggs/Others/" class="post-category">
+                                    Others
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/macOS/">
+                            <span class="chip tag-color">macOS</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2019/12/macos.html">
+                        <div class="card-image">
+                            
+                            <img src="https://dn-coding-net-tweet.codehub.cn/photo/2019/c296865a-3fa4-4a37-aef0-c58601c476ee.jpg" class="responsive-img" alt="国光的macOS配置优化记录">
+                            
+                            <span class="card-title">国光的macOS配置优化记录</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                每次安装完系统配置环境都是一个极为耗费时间的时期，特此写一篇文章记录一下macOS的常用配置，为后面再次配置少走一些弯路。
+
+
+系统设置常用设置# 取消4位数密码限制 
+pwpolicy -clearaccountpolicies
+
+# 更
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-12-11
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/ggs/Others/" class="post-category">
+                                    Others
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/macOS/">
+                            <span class="chip tag-color">macOS</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2019/12/pc.html">
+                        <div class="card-image">
+                            
+                            <img src="https://dn-coding-net-tweet.codehub.cn/photo/2019/3781d551-545d-4bbc-8861-f7033b6cc886.jpg" class="responsive-img" alt="国光9102年末的黑苹果组装方案以及驱动分享">
+                            
+                            <span class="card-title">国光9102年末的黑苹果组装方案以及驱动分享</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                黑苹果Clover驱动分享项目基本上没有时间维护了，现在精力用来研究自己的信息安全技术了，黑苹果基本上不碰了，但是最近攒机不得不又来折腾下黑苹果，既然折腾了那就顺便来水一篇文章吧。
+
+
+主机参数总价￥4694 ，以下硬件是国光当时购买的价格
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-12-08
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/ggs/Others/" class="post-category">
+                                    Others
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/Hackintosh/">
+                            <span class="chip tag-color">Hackintosh</span>
+                        </a>
+                        
+                        <a href="/tags/macOS/">
+                            <span class="chip tag-color">macOS</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2019/11/vul1.html">
+                        <div class="card-image">
+                            
+                            <img src="https://dn-coding-net-tweet.codehub.cn/photo/2019/58509866-f59c-43f1-9d1d-2b3216c74ae0.jpg" class="responsive-img" alt="记录一次某客户系统的漏洞挖掘">
+                            
+                            <span class="card-title">记录一次某客户系统的漏洞挖掘</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                记录一个Java系统的漏洞挖掘，系统的主要的问题是没有做越权防护，其他漏洞暂时没有挖到，有点菜，先记录着吧，每天进步一点，总会变强的。
+ 
+
+系统介绍系统是一个Java写的自动化测试系统，不同角色之间做不同的事情，领导申请任务，审核同意，领
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-11-25
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/ggs/Web/" class="post-category">
+                                    Web
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/%E6%8C%96%E6%B4%9E/">
+                            <span class="chip tag-color">挖洞</span>
+                        </a>
+                        
+                        <a href="/tags/XSS/">
+                            <span class="chip tag-color">XSS</span>
+                        </a>
+                        
+                        <a href="/tags/%E8%B6%8A%E6%9D%83/">
+                            <span class="chip tag-color">越权</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2019/11/macmsf.html">
+                        <div class="card-image">
+                            
+                            <img src="https://dn-coding-net-tweet.codehub.cn/photo/2019/1e6d5aee-80ec-4e82-85c7-509e9a038061.jpg" class="responsive-img" alt="macOS下优雅的使用Metasploit">
+                            
+                            <span class="card-title">macOS下优雅的使用Metasploit</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                macOS下其实是可以直接安装原生的Metasploit的，这样很多攻击都可以在macOS下实现，基本上不需要打开Kali Linux虚拟机或者Docker了，很是方便，下面就简单记录下mac下MSF的安装。(不知不觉又水了一篇文章)
+
+
+
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-11-19
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/ggs/Others/" class="post-category">
+                                    Others
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/Metasploit/">
+                            <span class="chip tag-color">Metasploit</span>
+                        </a>
+                        
+                        <a href="/tags/macOS/">
+                            <span class="chip tag-color">macOS</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2019/11/winhash.html">
+                        <div class="card-image">
+                            
+                            <img src="https://dn-coding-net-tweet.codehub.cn/photo/2019/f2c800d3-2ffd-4a59-b23c-9f8b49d08776.jpg" class="responsive-img" alt="Windows用户密码的加密方法与破解">
+                            
+                            <span class="card-title">Windows用户密码的加密方法与破解</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                再研究Hastcat的时候涉及到了Windows的Hash破解，感觉这个地方还是有一些姿势点和细节的，特此写文章记录之。
+ 
+
+Hash简介Hash 一般翻译为“散列”，也可直接音译为“哈希”的。这个加密函数对一个任意长度的字符串数据进行一
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-11-18
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/ggs/Others/" class="post-category">
+                                    Others
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/%E7%A0%B4%E8%A7%A3/">
+                            <span class="chip tag-color">破解</span>
+                        </a>
+                        
+                        <a href="/tags/Hash/">
+                            <span class="chip tag-color">Hash</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2019/11/pyfor.html">
+                        <div class="card-image">
+                            
+                            <img src="https://dn-coding-net-tweet.codehub.cn/photo/2019/3e3d0b43-8496-4ba9-be19-27a1211b37e4.jpg" class="responsive-img" alt="Python循环输出各种图案">
+                            
+                            <span class="card-title">Python循环输出各种图案</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                以前水过一篇C语言输出各种 * 号组成的图像的相关文章，今天用Python来实现发现更加简单灵活，特此写文章记录一下。
+ 
+
+前言以前水的一篇文章：C语言循环输出各种 * 组成的图形 今天用Python去复现，发现可以更加简单高效，就顺便再
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-11-17
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/ggs/Python/" class="post-category">
+                                    Python
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/Python/">
+                            <span class="chip tag-color">Python</span>
+                        </a>
+                        
+                        <a href="/tags/Code/">
+                            <span class="chip tag-color">Code</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+    </article>
+
+</main>
+
+
+<div class="container paging">
+    <div class="row">
+        <div class="col s6 m4 l4">
+            
+            <a class="left btn-floating btn-large disabled">
+                <i class="fas fa-angle-left"></i>
+            </a>
+            
+        </div>
+        <div class="page-info col m4 l4 hide-on-small-only">
+            <div class="center-align b-text-gray">1 / 6</div>
+        </div>
+        <div class="col s6 m4 l4">
+            
+            <a href="/page/2/"
+               class="right btn-floating btn-large waves-effect waves-light right-color">
+                <i class="fas fa-angle-right"></i>
+            </a>
+            
+        </div>
+    </div>
+</div>
+
+
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">年份</span>
+            <a href="https://www.sqlsec.com" target="_blank">国光</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank" rel="nofollow">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="nofollow">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">206k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                &nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                &nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    window.setTimeout("siteTime()", 1000);
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2016";
+                    var startMonth = "4";
+                    var startDate = "23";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 ";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 ";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+            <span id="icp"><img src="{% static 'medias/icp.png' %}" style="vertical-align: text-bottom;" />
+                <a href="{{ SITE_ICP_URL }}" target="_blank" rel="nofollow">{{ SITE_ICP }}</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+    <a href="mailto:admin@sqlsec.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+    <a href="http://www.sqlsec.com/baidusitemap.xml" class="tooltipped" target="_blank" data-tooltip="网站的SiteMap: http://www.sqlsec.com/baidusitemap.xml" data-position="top" data-delay="50">
+        <i class="fas fa-sitemap"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+    <a href="/avs/" class="tooltipped" target="_blank" data-tooltip="文章更新动态" data-position="top" data-delay="50">
+        <i class="far fa-calendar-alt"></i>
+    </a>
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="{% static 'js/search.js' %}"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="https://html.sqlsec.com/materialize.min.js"></script>
+    <script src="https://html.sqlsec.com/masonry.pkgd.min.js"></script>
+    <script src="https://html.sqlsec.com/aos.js"></script>
+    <script src="https://html.sqlsec.com/scrollProgress.min.js"></script>
+    <script src="https://html.sqlsec.com/lightgallery-all.min.js"></script>
+    <script src="{% static '/js/matery.js' %}"></script>
+    
+    <script src="https://html.sqlsec.com/clicklove.js" async="async"></script>
+    
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i["DaoVoiceObject"] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            a.charset = "utf-8";
+            m.parentNode.insertBefore(a, m)
+        })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') +
+            "//widget.daovoice.io/widget/6984b559.js", "daovoice")
+        daovoice('init', {
+            app_id: ""
+        });
+        daovoice('update');
+    </script>
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="https://html.sqlsec.com/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

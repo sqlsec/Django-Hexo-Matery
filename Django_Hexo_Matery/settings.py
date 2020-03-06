@@ -1,7 +1,9 @@
 import os
+import sys
 
 # 基础目录
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 
 SECRET_KEY = '_=po3tapr+1rd)bdvu#_!mg4z3%%g^xm4puyb1-!gxlxom7ke8'
 
@@ -11,6 +13,7 @@ ALLOWED_HOSTS = []
 
 # APP注册相关
 INSTALLED_APPS = [
+    'simpleui',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -35,7 +38,7 @@ ROOT_URLCONF = 'Django_Hexo_Matery.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -43,6 +46,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
+                'blog.views.global_setting',
             ],
         },
     },
@@ -53,8 +58,11 @@ WSGI_APPLICATION = 'Django_Hexo_Matery.wsgi.application'
 # 数据库配置
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'django-blog',
+        'USER': 'root',
+        'PASSWORD': 'P@ssw0rd',
+        'HOST': '127.0.0.1'
     }
 }
 
@@ -75,9 +83,9 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # 语言时区
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hans'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
@@ -87,3 +95,25 @@ USE_TZ = True
 
 # 静态文件配置
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [(os.path.join(BASE_DIR, 'static'))]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# 网站的基本信息配置
+SITE_NAME = '国光'  # 站点名称
+SITE_DESCRIPTION = '国光'  # 站点描述
+SITE_KEYWORDS = '国光,信息安全,Web安全,极客'  # 站点关键词
+SITE_TITLE = '信息安全学习记录'  # 博客标题
+SITE_TYPE_CHINESE = '宁静致远'  # 打字效果 中文内容
+SITE_TYPE_ENGLISH = 'The quieter you become, the more you are able to hear'  # 打字效果 英文内容
+SITE_MAIL = 'admin@sqlsec.com'  # 我的邮箱
+SITE_ICP = '苏ICP备19074591号'  # 网站备案号
+SITE_ICP_URL = 'http://beian.miit.gov.cn'  # 备案号超链接地址
+
+# Simple Ui 相关设置
+SIMPLEUI_LOGIN_PARTICLES = False
+SIMPLEUI_ANALYSIS = False
+SIMPLEUI_STATIC_OFFLINE = True
+SIMPLEUI_LOADING = False
+SIMPLEUI_LOGO = 'https://image.3001.net/images/20191031/15724874583730.png'
