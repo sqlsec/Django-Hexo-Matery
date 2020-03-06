@@ -8,7 +8,7 @@ class Tag(models.Model):
     name = models.CharField(max_length=30, verbose_name='标签名称')
 
     class Meta:
-        verbose_name = '文章标签'
+        verbose_name = '标签'
         verbose_name_plural = verbose_name
 
     def __str__(self):
@@ -23,7 +23,7 @@ class Category(models.Model):
     index = models.IntegerField(default=99, verbose_name='分类排序')
 
     class Meta:
-        verbose_name = '文章分类'
+        verbose_name = '分类'
         verbose_name_plural = verbose_name
 
     def __str__(self):
@@ -36,6 +36,7 @@ class Article(models.Model):
     """
     title = models.CharField(max_length=50, verbose_name='文章标题')
     desc = models.CharField(max_length=50, verbose_name='文章描述')
+    cover = models.CharField(max_length=200, default='https://image.3001.net/images/20200304/15832956271308.jpg', verbose_name='文章封面')
     content = models.TextField(verbose_name='文章内容')
     click_count = models.IntegerField(default=0, verbose_name='点击次数')
     is_recommend = models.BooleanField(default=False, verbose_name='是否推荐')
@@ -63,7 +64,7 @@ class Comment(models.Model):
     pid = models.ForeignKey('self', blank=True, null=True, verbose_name='父级评论', on_delete=models.CASCADE)
 
     class Meta:
-        verbose_name = '文章评论'
+        verbose_name = '评论'
         verbose_name_plural = verbose_name
 
     def __unicode__(self):
@@ -76,10 +77,11 @@ class Links(models.Model):
     """
     title = models.CharField(max_length=50, verbose_name='友情链接标题')
     url = models.URLField(verbose_name='友情链接地址')
+    image = models.CharField(max_length=200, default='https://image.3001.net/images/20190330/1553875722169.jpg', verbose_name='友情链接头像')
     index = models.IntegerField(default=999, verbose_name='排列顺序(从小到大)')
 
     class Meta:
-        verbose_name = '友情链接'
+        verbose_name = '友链'
         verbose_name_plural = verbose_name
 
     def __str__(self):
@@ -100,6 +102,7 @@ class Site(models.Model):
     icp_url = models.CharField(max_length=50, verbose_name='备案链接')
     site_mail = models.CharField(max_length=50, verbose_name='我的邮箱')
     site_qq = models.CharField(max_length=50, verbose_name='我的QQ')
+    site_avatar = models.CharField(max_length=200, default='https://image.3001.net/images/20171226/15142933784705.png', verbose_name='我的头像')
 
     class Meta:
         verbose_name = '网站设置'
