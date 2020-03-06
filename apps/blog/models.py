@@ -1,4 +1,9 @@
+from datetime import datetime
 from django.db import models
+from django.utils.html import format_html
+
+from mdeditor.fields import MDTextField
+
 
 
 class Tag(models.Model):
@@ -35,15 +40,30 @@ class Article(models.Model):
     文章
     """
     title = models.CharField(max_length=50, verbose_name='文章标题')
-    desc = models.CharField(max_length=50, verbose_name='文章描述')
+    desc = models.TextField(max_length=30, verbose_name='文章描述')
     cover = models.CharField(max_length=200, default='https://image.3001.net/images/20200304/15832956271308.jpg', verbose_name='文章封面')
-    content = models.TextField(verbose_name='文章内容')
+    content = MDTextField(verbose_name='文章内容')
     click_count = models.IntegerField(default=0, verbose_name='点击次数')
     is_recommend = models.BooleanField(default=False, verbose_name='是否推荐')
-    add_time = models.DateTimeField(auto_now_add=True, verbose_name='发布时间')
+    add_time = models.DateTimeField(default=datetime.now, verbose_name='发布时间')
     update_time = models.DateTimeField(auto_now_add=True, verbose_name='更新时间')
     category = models.ForeignKey(Category, blank=True, null=True, verbose_name='文章分类', on_delete=models.CASCADE)
     tag = models.ManyToManyField(Tag, verbose_name='文章标签')
+
+    def cover_data(self):
+        return format_html(
+            '<img src="{}" width="156px" height="98px"/>',
+            self.cover,
+        )
+
+    def cover_admin(self):
+        return format_html(
+            '<img src="{}" width="400px" height="250px"/>',
+            self.cover,
+        )
+
+    cover_data.short_description = '文章封面'
+    cover_admin.short_description = '文章封面'
 
     class Meta:
         verbose_name = '文章'
@@ -67,7 +87,7 @@ class Comment(models.Model):
         verbose_name = '评论'
         verbose_name_plural = verbose_name
 
-    def __unicode__(self):
+    def __str__(self):
         return self.content[:20]
 
 
@@ -79,6 +99,21 @@ class Links(models.Model):
     url = models.URLField(verbose_name='友情链接地址')
     image = models.CharField(max_length=200, default='https://image.3001.net/images/20190330/1553875722169.jpg', verbose_name='友情链接头像')
     index = models.IntegerField(default=999, verbose_name='排列顺序(从小到大)')
+
+    def avatar_data(self):
+        return format_html(
+            '<img src="{}" width="50px" height="50px" style="border-radius: 50%;" />',
+            self.image,
+        )
+
+    def avatar_admin(self):
+        return format_html(
+            '<img src="{}" width="250px" height="250px"/>',
+            self.image,
+        )
+
+    avatar_data.short_description = '友链头像'
+    avatar_admin.short_description = '友链头像'
 
     class Meta:
         verbose_name = '友链'

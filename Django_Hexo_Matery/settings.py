@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
+    'mdeditor',
 ]
 
 # 中间件相关
@@ -99,8 +100,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [(os.path.join(BASE_DIR, 'static'))]
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # 网站的基本信息配置
 SITE_NAME = '国光'  # 站点名称
@@ -119,3 +120,6 @@ SIMPLEUI_ANALYSIS = False
 SIMPLEUI_STATIC_OFFLINE = True
 SIMPLEUI_LOADING = False
 SIMPLEUI_LOGO = 'https://image.3001.net/images/20191031/15724874583730.png'
+
+# 后台MarkDown编辑器配置
+X_FRAME_OPTIONS = 'SAMEORIGIN'
