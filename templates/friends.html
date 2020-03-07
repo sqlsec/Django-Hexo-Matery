@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
-{% load random_num %}
+{% load custom_tag %}
+{% block title %}友情链接 | {% endblock %}
 {% block custom_style %}
 <style>
     .friends-container {
@@ -201,11 +202,10 @@
 {% block index %}
 {% endblock %}
 
-{% block indexCard %}
-{% endblock %}
-
 {% block contents %}
-<div class="container friends-container">
+
+<main class="content" class="col s12 m12 l9">
+    <div class="container friends-container">
         <div class="card">
             <div class="card-content">
                 <div class="tag-title center-align">
@@ -238,6 +238,7 @@
             </div>
         </div>
     </div>
+</main>
 {% endblock %}
 
 {% block pagination %}

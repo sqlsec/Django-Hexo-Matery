@@ -1,0 +1,1510 @@
+{% extends 'base.html' %}
+
+{% block banner %}
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://image.3001.net/images/20200304/15832956271308.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        Django3 学习记录笔记
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block custom_style %}
+    <style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+{% endblock %}
+
+{% block contents %}
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+
+                    <div class="article-tag">
+
+                            <a href="/tags/Python/">
+                                <span class="chip tag-color">Python</span>
+                            </a>
+
+                            <a href="/tags/Django/">
+                                <span class="chip tag-color">Django</span>
+                            </a>
+
+                    </div>
+
+                </div>
+                <div class="col s5 right-align">
+
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+
+                            <a href="/ggs/Python/" class="post-category">
+                                Python
+                            </a>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-03-04
+                </div>
+
+
+
+
+
+                    <div class="info-break-policy">
+                        <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        1.7k
+                    </div>
+
+
+
+                    <div class="info-break-policy">
+                        <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        8 分
+                    </div>
+
+
+
+
+                    <div id="busuanzi_container_page_pv" class="info-break-policy" style="display: inline;">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv">82</span>
+                    </div>
+
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p><div class="img-item" data-src="https://image.3001.net/images/20200304/15832956444378.jpg" data-sub-html=".caption"><img src="https://image.3001.net/images/20200304/15832956444378.jpg" alt="" class="img-shadow img-margin"></div>  </p>
+<p>Django是一个文档很全的框架，学习的时候老是遇到一些坑，这里就顺便记录一下，以便后面使用，同时也希望本文可以帮助到其他的朋友。</p>
+<a id="more" target="_blank"></a>
+
+<h1 id="toc-heading-1"><a href="#开发环境" class="headerlink" title="开发环境" target="_blank"></a>开发环境</h1><p><strong>操作系统</strong>：macOS Cataline 10.15.3 </p>
+<p><strong>Python</strong>：<a href="https://www.sqlsec.com/2019/12/pyenv.html" target="_blank">pyenv</a> 安装的 <a href="https://www.pypy.org" target="_blank" rel="noopener">pypy3.6-7.3.0</a> (PyPy解释器平均比我们平时使用的CPython快4.4倍)</p>
+<p><strong>Django</strong>：Django 3.0.3</p>
+<h1 id="toc-heading-2"><a href="#相关依赖" class="headerlink" title="相关依赖" target="_blank"></a>相关依赖</h1><h2 id="toc-heading-3"><a href="#MySQL" class="headerlink" title="MySQL" target="_blank"></a>MySQL</h2><p>macOS下Django3在连接MySQL会出一些问题，解决如下：</p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言">Bash</div><pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># 确保 pip 是最新版本</span>
+$ pip <span class="token function">install</span> --upgrade pip
+
+<span class="token comment" spellcheck="true"># 临时在当前的shell环境中配置一个 openssl 变量</span>
+<span class="token function">export</span> LDFLAGS<span class="token operator">=</span><span class="token string">"-L/usr/local/opt/openssl/lib <span class="token variable">$LDFLAGS</span>"</span>
+<span class="token function">export</span> CPPFLAGS<span class="token operator">=</span><span class="token string">"-I/usr/local/opt/openssl/include <span class="token variable">$CPPFLAGS</span>"</span>
+
+$ pip <span class="token function">install</span> mysqlclient</code></pre></div>
+<h2 id="toc-heading-4"><a href="#pillow" class="headerlink" title="pillow" target="_blank"></a>pillow</h2><p>在<code>models.py</code>中含有<code>ImageField</code>图片类型的时候，如果<code>pillow</code>没有安装好的话 会报错：</p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言">Python</div><pre class=" language-python"><code class="language-python">image <span class="token operator">=</span> models<span class="token punctuation">.</span>ImageField<span class="token punctuation">(</span>upload_to<span class="token operator">=</span><span class="token string">'avatar/%Y/%m'</span><span class="token punctuation">,</span> verbose_name<span class="token operator">=</span><span class="token string">'头像'</span><span class="token punctuation">,</span> max_length<span class="token operator">=</span><span class="token number">100</span><span class="token punctuation">)</span></code></pre></div>
+<p>解决方法是macOS下安装配置好<code>zlib</code>即可：</p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言">Bash</div><pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># 安装 zlib</span>
+$ brew <span class="token function">install</span> zlib
+
+<span class="token comment" spellcheck="true"># 链接 zlib 会提示</span>
+$ brew <span class="token function">link</span> zlib --force
+
+Warning: Refusing to <span class="token function">link</span> macOS-provided software: zlib
+For compilers to <span class="token function">find</span> zlib you may need to set:
+  <span class="token function">export</span> LDFLAGS<span class="token operator">=</span><span class="token string">"-L/usr/local/opt/zlib/lib"</span>
+  <span class="token function">export</span> CPPFLAGS<span class="token operator">=</span><span class="token string">"-I/usr/local/opt/zlib/include"</span></code></pre></div>
+<p>根据上述提示，进行如下操作：</p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言">Bash</div><pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># 临时在当前的shell环境中配置一个 zlib 变量</span>
+<span class="token function">export</span> LDFLAGS<span class="token operator">=</span><span class="token string">"-L/usr/local/opt/zlib/lib"</span>
+<span class="token function">export</span> CPPFLAGS<span class="token operator">=</span><span class="token string">"-I/usr/local/opt/zlib/include"</span>
+
+$ pip <span class="token function">install</span> pillow</code></pre></div>
+<h1 id="toc-heading-5"><a href="#目录配置" class="headerlink" title="目录配置" target="_blank"></a>目录配置</h1><h2 id="toc-heading-6"><a href="#templates" class="headerlink" title="templates" target="_blank"></a>templates</h2><p>模板目录 Python 命令行创建的 Django 项目默认是没有自动生成这个目录的，首先项目目录下新建<code>templates</code>文件夹，然后配置一下settings：</p>
+<p><strong>settings.py</strong></p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言">Python</div><pre class=" language-python"><code class="language-python">TEMPLATES <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+        <span class="token string">'BACKEND'</span><span class="token punctuation">:</span> <span class="token string">'django.template.backends.django.DjangoTemplates'</span><span class="token punctuation">,</span>
+        <span class="token string">'DIRS'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>BASE_DIR<span class="token punctuation">,</span> <span class="token string">'templates'</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true"># 将 templates 设置为模板目录</span>
+        <span class="token string">'APP_DIRS'</span><span class="token punctuation">:</span> <span class="token boolean">True</span><span class="token punctuation">,</span>
+        <span class="token string">'OPTIONS'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token string">'context_processors'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+                <span class="token string">'django.template.context_processors.debug'</span><span class="token punctuation">,</span>
+                <span class="token string">'django.template.context_processors.request'</span><span class="token punctuation">,</span>
+                <span class="token string">'django.contrib.auth.context_processors.auth'</span><span class="token punctuation">,</span>
+                <span class="token string">'django.contrib.messages.context_processors.messages'</span><span class="token punctuation">,</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span></code></pre></div>
+<h2 id="toc-heading-7"><a href="#static" class="headerlink" title="static" target="_blank"></a>static</h2><p>该目录存放一些css js 之类的静态文件，也得手动到 settings.py 添加配置一下：</p>
+<p><strong>settings.py</strong></p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言">Python</div><pre class=" language-python"><code class="language-python">STATIC_URL <span class="token operator">=</span> <span class="token string">'/static/'</span>
+STATICFILES_DIRS <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">(</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>BASE_DIR<span class="token punctuation">,</span> <span class="token string">'static'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">]</span></code></pre></div>
+<h2 id="toc-heading-8"><a href="#apps" class="headerlink" title="apps" target="_blank"></a>apps</h2><p>当项目下的app太多的时候，项目的目录结构看上去就会比较混乱，一个解决办法就是将项目下的所有app都放到一个apps的文件夹中，首先项目下新建<code>apps</code>文件夹，接着手动到 settings.py 添加配置一下：</p>
+<p><strong>settings.py</strong></p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言">Python</div><pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> os
+<span class="token keyword">import</span> sys
+
+BASE_DIR <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>dirname<span class="token punctuation">(</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>dirname<span class="token punctuation">(</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>abspath<span class="token punctuation">(</span>__file__<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+sys<span class="token punctuation">.</span>path<span class="token punctuation">.</span>insert<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>BASE_DIR<span class="token punctuation">,</span> <span class="token string">'apps'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># 将 apps 文件夹添加到 BASE_DIR中</span></code></pre></div>
+<h2 id="toc-heading-9"><a href="#media" class="headerlink" title="media" target="_blank"></a>media</h2><p>media文件夹用来存放用户上传的图片资料等，首先配置下settings.py</p>
+<p><strong>settings.py</strong></p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言">Python</div><pre class=" language-python"><code class="language-python">TEMPLATES <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+        <span class="token string">'BACKEND'</span><span class="token punctuation">:</span> <span class="token string">'django.template.backends.django.DjangoTemplates'</span><span class="token punctuation">,</span>
+        <span class="token string">'DIRS'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>BASE_DIR<span class="token punctuation">,</span> <span class="token string">'templates'</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token string">'APP_DIRS'</span><span class="token punctuation">:</span> <span class="token boolean">True</span><span class="token punctuation">,</span>
+        <span class="token string">'OPTIONS'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token string">'context_processors'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+                <span class="token string">'django.template.context_processors.debug'</span><span class="token punctuation">,</span>
+                <span class="token string">'django.template.context_processors.request'</span><span class="token punctuation">,</span>
+                <span class="token string">'django.contrib.auth.context_processors.auth'</span><span class="token punctuation">,</span>
+                <span class="token string">'django.contrib.messages.context_processors.messages'</span><span class="token punctuation">,</span>
+                <span class="token string">'django.template.context_processors.media'</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true"># 添加 media 模板</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span></code></pre></div>
+<p>接着配置 media 根目录变量：</p>
+<p><strong>settings.py</strong></p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言">Python</div><pre class=" language-python"><code class="language-python">MEDIA_URL <span class="token operator">=</span> <span class="token string">'/media/'</span>
+MEDIA_ROOT <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>BASE_DIR<span class="token punctuation">,</span> <span class="token string">'media'</span><span class="token punctuation">)</span></code></pre></div>
+<p>配置好之后在 urls.py 里面配置下 media 的路由规则：</p>
+<p><strong>urls.py</strong></p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言">Python</div><pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> django<span class="token punctuation">.</span>urls <span class="token keyword">import</span> path<span class="token punctuation">,</span> re_path
+<span class="token keyword">from</span> django<span class="token punctuation">.</span>views<span class="token punctuation">.</span>static <span class="token keyword">import</span> serve
+<span class="token keyword">from</span> project<span class="token punctuation">.</span>settings <span class="token keyword">import</span> MEDIA_ROOT
+
+urlpatterns <span class="token operator">=</span> <span class="token punctuation">[</span>
+    path<span class="token punctuation">(</span><span class="token string">'admin/'</span><span class="token punctuation">,</span> admin<span class="token punctuation">.</span>site<span class="token punctuation">.</span>urls<span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token comment" spellcheck="true"># 配置 media 的处理</span>
+    re_path<span class="token punctuation">(</span><span class="token string">'media/(?P&lt;path&gt;.*)'</span><span class="token punctuation">,</span> serve<span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token string">'document_root'</span><span class="token punctuation">:</span> MEDIA_ROOT<span class="token punctuation">}</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'org_list'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span></code></pre></div>
+<p>下面看一下 简单的 引用 meida 中图片文件的实例：</p>
+<p><strong>models.py</strong></p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言">Python</div><pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">CourseOrg</span><span class="token punctuation">(</span>models<span class="token punctuation">.</span>Model<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    image <span class="token operator">=</span> models<span class="token punctuation">.</span>ImageField<span class="token punctuation">(</span>upload_to<span class="token operator">=</span><span class="token string">'org/%Y/%m'</span><span class="token punctuation">,</span> verbose_name<span class="token operator">=</span><span class="token string">'logo'</span><span class="token punctuation">,</span> max_length<span class="token operator">=</span><span class="token number">100</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span></code></pre></div>
+<p>前端调用显示 media 里的文件</p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言">Html</div><pre class=" language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>200<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>120<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>scrollLoading<span class="token punctuation">"</span></span> <span class="token attr-name">data-url</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{{ MEDIA_URL }}{{ course_org.image }}<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span></code></pre></div>
+<h1 id="toc-heading-10"><a href="#实用插件" class="headerlink" title="实用插件" target="_blank"></a>实用插件</h1><h2 id="toc-heading-11"><a href="#验证码" class="headerlink" title="验证码" target="_blank"></a>验证码</h2><p><strong>项目地址</strong>：<a href="https://github.com/mbi/django-simple-captcha" target="_blank" rel="noopener">https://github.com/mbi/django-simple-captcha</a></p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言">Bash</div><pre class=" language-bash"><code class="language-bash">$ pip <span class="token function">install</span> django-simple-captcha</code></pre></div>
+<p>安装好之后，在<code>settings.py</code>引用即可：</p>
+<p><strong>settings.py</strong></p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言">Python</div><pre class=" language-python"><code class="language-python">INSTALLED_APPS <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token string">'django.contrib.admin'</span><span class="token punctuation">,</span>
+    <span class="token string">'django.contrib.auth'</span><span class="token punctuation">,</span>
+    <span class="token string">'django.contrib.contenttypes'</span><span class="token punctuation">,</span>
+    <span class="token string">'django.contrib.sessions'</span><span class="token punctuation">,</span>
+    <span class="token string">'django.contrib.messages'</span><span class="token punctuation">,</span>
+    <span class="token string">'django.contrib.staticfiles'</span><span class="token punctuation">,</span>
+    <span class="token string">'captcha'</span><span class="token punctuation">,</span>  <span class="token comment" spellcheck="true"># 引用验证码插件</span>
+<span class="token punctuation">]</span></code></pre></div>
+<p>引用完成后，更新下数据库的信息，因为这个验证码信息是存放在本地数据库中的：</p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言">Bash</div><pre class=" language-bash"><code class="language-bash">$ python manage.py makemigrations
+$ python manage.py migrate </code></pre></div>
+<p>数据库更新成功后可以在数据库下看到  <code>captcha_captchastore</code>  表名，接着得配置下验证码的url路由规则：</p>
+<p><strong>urls.py</strong></p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言">Python</div><pre class=" language-python"><code class="language-python">urlpatterns <span class="token operator">=</span> <span class="token punctuation">[</span>
+    path<span class="token punctuation">(</span><span class="token string">'admin/'</span><span class="token punctuation">,</span> admin<span class="token punctuation">.</span>site<span class="token punctuation">.</span>urls<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    path<span class="token punctuation">(</span><span class="token string">'captcha/'</span><span class="token punctuation">,</span> include<span class="token punctuation">(</span><span class="token string">'captcha.urls'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span></code></pre></div>
+<p>Form表单中定义如下：</p>
+<p><strong>forms.py</strong></p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言">Python</div><pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> django <span class="token keyword">import</span> forms
+<span class="token keyword">from</span> captcha<span class="token punctuation">.</span>fields <span class="token keyword">import</span> CaptchaField
+
+<span class="token keyword">class</span> <span class="token class-name">RegisterForm</span><span class="token punctuation">(</span>forms<span class="token punctuation">.</span>Form<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    email <span class="token operator">=</span> forms<span class="token punctuation">.</span>EmailField<span class="token punctuation">(</span>required<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+    password <span class="token operator">=</span> forms<span class="token punctuation">.</span>CharField<span class="token punctuation">(</span>required<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> min_length<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">)</span>
+    captcha <span class="token operator">=</span> CaptchaField<span class="token punctuation">(</span>error_messages<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">'invalid'</span><span class="token punctuation">:</span> <span class="token string">'验证码错误'</span><span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre></div>
+<p>Views里面实例化这个表单类：</p>
+<p><strong>views.py</strong></p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言">Python</div><pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">RegisterView</span><span class="token punctuation">(</span>View<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">get</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> request<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        register_form <span class="token operator">=</span> RegisterForm<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> render<span class="token punctuation">(</span>request<span class="token punctuation">,</span> <span class="token string">'register.html'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+            <span class="token string">'register_form'</span><span class="token punctuation">:</span> register_form
+        <span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre></div>
+<p>views.py里面 返回了<code>register_form</code>到前端，接着前端可以直接调用 验证码：</p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言">Html</div><pre class=" language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>form-group marb8 captcha1<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span><span class="token punctuation">&gt;</span></span>验证码<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">&gt;</span></span>
+{{ register_form.captcha }}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span></code></pre></div>
+<h2 id="toc-heading-12"><a href="#分页" class="headerlink" title="分页" target="_blank"></a>分页</h2><p><strong>项目地址</strong>：<a href="https://github.com/jamespacileo/django-pure-pagination" target="_blank" rel="noopener">https://github.com/jamespacileo/django-pure-pagination</a></p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言">Bash</div><pre class=" language-bash"><code class="language-bash">$ pip <span class="token function">install</span> django-pure-pagination</code></pre></div>
+<p>安装好之后，在<code>settings.py</code>引用即可：</p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言">Python</div><pre class=" language-python"><code class="language-python">INSTALLED_APPS <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token string">'django.contrib.admin'</span><span class="token punctuation">,</span>
+    <span class="token string">'django.contrib.auth'</span><span class="token punctuation">,</span>
+    <span class="token string">'django.contrib.contenttypes'</span><span class="token punctuation">,</span>
+    <span class="token string">'django.contrib.sessions'</span><span class="token punctuation">,</span>
+    <span class="token string">'django.contrib.messages'</span><span class="token punctuation">,</span>
+    <span class="token string">'django.contrib.staticfiles'</span><span class="token punctuation">,</span>
+      <span class="token string">'pure_pagination'</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span></code></pre></div>
+<p>views里面的基本用法：</p>
+<p><strong>views.py</strong></p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言">Python</div><pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> pure_pagination <span class="token keyword">import</span> Paginator<span class="token punctuation">,</span> EmptyPage<span class="token punctuation">,</span> PageNotAnInteger
+
+<span class="token keyword">class</span> <span class="token class-name">OrgView</span><span class="token punctuation">(</span>View<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""
+    课程机构列表功能显示
+    """</span>
+    <span class="token keyword">def</span> <span class="token function">get</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> request<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment" spellcheck="true"># 课程机构</span>
+        all_orgs <span class="token operator">=</span> CourseOrg<span class="token punctuation">.</span>objects<span class="token punctuation">.</span>all<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        <span class="token comment" spellcheck="true"># 官方提倡的写法</span>
+        <span class="token keyword">try</span><span class="token punctuation">:</span>
+            page <span class="token operator">=</span> request<span class="token punctuation">.</span>GET<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'page'</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+        <span class="token keyword">except</span> PageNotAnInteger<span class="token punctuation">:</span>
+            page <span class="token operator">=</span> <span class="token number">1</span>
+
+        <span class="token comment" spellcheck="true"># 将数据库中 查询的 all_orgs 分页 每页显示5个</span>
+        p <span class="token operator">=</span> Paginator<span class="token punctuation">(</span>all_orgs<span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> request<span class="token operator">=</span>request<span class="token punctuation">)</span>
+        orgs <span class="token operator">=</span> p<span class="token punctuation">.</span>page<span class="token punctuation">(</span>page<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> render<span class="token punctuation">(</span>request<span class="token punctuation">,</span> <span class="token string">'org-list.html'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+            <span class="token string">'all_orgs'</span><span class="token punctuation">:</span> orgs<span class="token punctuation">,</span>  <span class="token comment" spellcheck="true"># 分页的结果传给前端</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre></div>
+<p>前端分页的引用：</p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言">Html</div><pre class=" language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>pageturn<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>pagelist<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+<span class="token comment" spellcheck="true">&lt;!-- 判断是是否有上一页 --&gt;</span>
+  {% if all_orgs.has_previous %}
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>long<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>?{{ all_orgs.previous_page_number.querystring }}<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>上一页<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span>
+  {% endif %}
+
+<span class="token comment" spellcheck="true">&lt;!-- 显示中间页数 和 高亮 当前页 --&gt;</span>
+  {% for page in all_orgs.pages %}
+  {% if page %}
+  {% ifequal page all_orgs.number %}
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>active<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>?{{ page.querystring }}<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>page<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>{{ page }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span>
+  {% else %}
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>?{{ page.querystring }}<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>page<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>{{ page }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span>
+  {% endifequal %}
+  {% else %}
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>none<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>...<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span>
+  {% endif %}
+  {% endfor %}
+
+<span class="token comment" spellcheck="true">&lt;!-- 判断是是否有下一页 --&gt;</span>
+  {% if all_orgs.has_next %}
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>long<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>?{{ all_orgs.next_page_number.querystring }}<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>下一页<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span>
+  {% endif %}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span></code></pre></div>
+<p>最后的分页效果如下：</p>
+<p><div class="img-item" data-src="https://image.3001.net/images/20200304/15833016928937.jpg" data-sub-html=".caption"><img src="https://image.3001.net/images/20200304/15833016928937.jpg" alt="Django分页效果" class="img-shadow img-margin"><div class="caption"><b class="center-caption">Django分页效果</b></div></div>  </p>
+<h2 id="toc-heading-13"><a href="#导入导出" class="headerlink" title="导入导出" target="_blank"></a>导入导出</h2><p><strong>项目地址</strong>：<a href="https://github.com/django-import-export/django-import-export" target="_blank" rel="noopener">https://github.com/django-import-export/django-import-export</a></p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言">Bash</div><pre class=" language-bash"><code class="language-bash">$ pip <span class="token function">install</span> django-import-export</code></pre></div>
+<p>安装好之后，在<code>settings.py</code>引用即可：</p>
+<p><strong>settings.py</strong></p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言">Python</div><pre class=" language-python"><code class="language-python">INSTALLED_APPS <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token string">'import_export'</span><span class="token punctuation">,</span>  <span class="token comment" spellcheck="true"># 引用导入导出插件</span>
+    <span class="token string">'django.contrib.admin'</span><span class="token punctuation">,</span>
+    <span class="token string">'django.contrib.auth'</span><span class="token punctuation">,</span>
+    <span class="token string">'django.contrib.contenttypes'</span><span class="token punctuation">,</span>
+    <span class="token string">'django.contrib.sessions'</span><span class="token punctuation">,</span>
+    <span class="token string">'django.contrib.messages'</span><span class="token punctuation">,</span>
+    <span class="token string">'django.contrib.staticfiles'</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span></code></pre></div>
+<p>接着可以直接在Django Admin后台引用：</p>
+<p><strong>admin.py</strong></p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言">Python</div><pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> import_export<span class="token punctuation">.</span>admin <span class="token keyword">import</span> ImportExportActionModelAdmin
+
+@admin<span class="token punctuation">.</span>register<span class="token punctuation">(</span>CourseOrg<span class="token punctuation">)</span>
+<span class="token keyword">class</span> <span class="token class-name">CourseOrgAdmin</span><span class="token punctuation">(</span>ImportExportActionModelAdmin<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    list_display <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'name'</span><span class="token punctuation">,</span> <span class="token string">'image_data'</span><span class="token punctuation">,</span> <span class="token string">'address'</span><span class="token punctuation">]</span>
+    search_fields <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'name'</span><span class="token punctuation">,</span> <span class="token string">'city'</span><span class="token punctuation">,</span> <span class="token string">'address'</span><span class="token punctuation">,</span> <span class="token string">'desc'</span><span class="token punctuation">]</span>
+    list_filter <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'city'</span><span class="token punctuation">,</span> <span class="token string">'add_time'</span><span class="token punctuation">]</span></code></pre></div>
+<p>最后配合Simple UI的效果如下：</p>
+<p><div class="img-item" data-src="https://image.3001.net/images/20200304/158329956016.jpg" data-sub-html=".caption"><img src="https://image.3001.net/images/20200304/158329956016.jpg" alt="Simple UI 导入导出" class="img-shadow img-margin"><div class="caption"><b class="center-caption">Simple UI 导入导出</b></div></div>  </p>
+<h1 id="toc-heading-14"><a href="#Admin-配置" class="headerlink" title="Admin 配置" target="_blank"></a>Admin 配置</h1><h2 id="toc-heading-15"><a href="#修改后台名称" class="headerlink" title="修改后台名称" target="_blank"></a>修改后台名称</h2><p>在urls.py 里面添加 如下即可：</p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言">Python</div><pre class=" language-python"><code class="language-python">admin<span class="token punctuation">.</span>site<span class="token punctuation">.</span>site_header <span class="token operator">=</span> <span class="token string">'后台管理'</span>
+admin<span class="token punctuation">.</span>site<span class="token punctuation">.</span>site_title <span class="token operator">=</span> <span class="token string">'Django 后台管理'</span></code></pre></div>
+<p>核心原理就是 在引用 这个模块的文件里面添加配置即可生效：</p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言">Python</div><pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> django<span class="token punctuation">.</span>contrib <span class="token keyword">import</span> admin</code></pre></div>
+<p>最后效果如下：</p>
+<p><div class="img-item" data-src="https://image.3001.net/images/20200304/15833022849572.jpg" data-sub-html=".caption"><img src="https://image.3001.net/images/20200304/15833022849572.jpg" alt="Django自定义后台名称" class="img-shadow img-margin"><div class="caption"><b class="center-caption">Django自定义后台名称</b></div></div>  </p>
+<h2 id="toc-heading-16"><a href="#图片显示" class="headerlink" title="图片显示" target="_blank"></a>图片显示</h2><p>Django Admin 的列表中图片只显示 url 地址，却不能直接显示出来：</p>
+<p><div class="img-item" data-src="https://image.3001.net/images/20200304/15833019013458.jpg" data-sub-html=".caption"><img src="https://image.3001.net/images/20200304/15833019013458.jpg" alt="Django Admin图片不显示" class="img-shadow img-margin"><div class="caption"><b class="center-caption">Django Admin图片不显示</b></div></div>  </p>
+<p>解决方法就是重写Django Admin 后台图片的显示。</p>
+<p><strong>models.py</strong></p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言">Python</div><pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> django<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>html <span class="token keyword">import</span> format_html
+
+<span class="token keyword">class</span> <span class="token class-name">CourseOrg</span><span class="token punctuation">(</span>models<span class="token punctuation">.</span>Model<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    image <span class="token operator">=</span> models<span class="token punctuation">.</span>ImageField<span class="token punctuation">(</span>upload_to<span class="token operator">=</span><span class="token string">'org/%Y/%m'</span><span class="token punctuation">,</span> verbose_name<span class="token operator">=</span><span class="token string">'logo'</span><span class="token punctuation">,</span> max_length<span class="token operator">=</span><span class="token number">100</span><span class="token punctuation">)</span>
+
+    <span class="token comment" spellcheck="true"># 定义 image_data 将 url 手动 通过 img 表情显示出来</span>
+    <span class="token keyword">def</span> <span class="token function">image_data</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> format_html<span class="token punctuation">(</span>
+            <span class="token string">'&lt;img src="{}" width="200px" height="90px"/&gt;'</span><span class="token punctuation">,</span>
+            self<span class="token punctuation">.</span>image<span class="token punctuation">.</span>url<span class="token punctuation">,</span>
+        <span class="token punctuation">)</span>
+        <span class="token comment" spellcheck="true"># 设置标题</span>
+    image_data<span class="token punctuation">.</span>short_description <span class="token operator">=</span> <span class="token string">'图片'</span>  </code></pre></div>
+<p><strong>admin.py</strong></p>
+<div class="code-area" style="position: relative"><i class="fas fa-angle-up code-expand" aria-hidden="true"></i><div class="codecopy_notice"></div><i class="fas fa-copy code_copy" title="复制代码" aria-hidden="true"></i><div class="code_lang" title="代码语言">Python</div><pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> django<span class="token punctuation">.</span>contrib <span class="token keyword">import</span> admin
+
+@admin<span class="token punctuation">.</span>register<span class="token punctuation">(</span>CourseOrg<span class="token punctuation">)</span>
+<span class="token keyword">class</span> <span class="token class-name">CourseOrgAdmin</span><span class="token punctuation">(</span>admin<span class="token punctuation">.</span>ModelAdmin<span class="token punctuation">)</span><span class="token punctuation">:</span>
+      <span class="token comment" spellcheck="true"># 显示里面 传入 我们自定义的 image_data</span>
+    list_display <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'name'</span><span class="token punctuation">,</span> <span class="token string">'image_data'</span><span class="token punctuation">,</span> <span class="token string">'address'</span><span class="token punctuation">]</span>
+    search_fields <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'name'</span><span class="token punctuation">,</span> <span class="token string">'city'</span><span class="token punctuation">,</span> <span class="token string">'address'</span><span class="token punctuation">,</span> <span class="token string">'desc'</span><span class="token punctuation">]</span>
+    list_filter <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'city'</span><span class="token punctuation">,</span> <span class="token string">'add_time'</span><span class="token punctuation">]</span>
+
+    <span class="token comment" spellcheck="true"># 设置该列不可编辑</span>
+    readonly_fields <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token string">'image_data'</span><span class="token punctuation">,</span><span class="token punctuation">)</span></code></pre></div>
+<p>最后显示效果如下：</p>
+<p><div class="img-item" data-src="https://image.3001.net/images/20200304/158329956016.jpg" data-sub-html=".caption"><img src="https://image.3001.net/images/20200304/158329956016.jpg" alt="Django Admin 图片显示" class="img-shadow img-margin"><div class="caption"><b class="center-caption">Django Admin 图片显示</b></div></div>  </p>
+
+            </div>
+            <hr>
+
+
+
+    <div class="reprint" id="reprint-statement">
+
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://www.sqlsec.com" rel="external nofollow noreferrer">国光</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://www.sqlsec.com/2020/03/django.html">https://www.sqlsec.com/2020/03/django.html</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://www.sqlsec.com" target="_blank">国光</a>
+                    !
+                </span>
+            </div>
+
+    </div>
+
+    <script async="" defer="">
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+
+                        <div class="article-tag">
+
+                                <a href="/tags/Python/">
+                                    <span class="chip tag-color">Python</span>
+                                </a>
+
+                                <a href="/tags/Django/">
+                                    <span class="chip tag-color">Django</span>
+                                </a>
+
+                        </div>
+
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+
+
+    <div class="social-share share-component" data-sites="qq,wechat,weibo" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"><a class="social-share-icon icon-qq" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3A%2F%2Fwww.sqlsec.com%2F2020%2F03%2Fdjango.html&amp;title=Django3%20%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E7%AC%94%E8%AE%B0%20%7C%20%E5%9B%BD%E5%85%89&amp;source=Django3%20%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E7%AC%94%E8%AE%B0%20%7C%20%E5%9B%BD%E5%85%89&amp;desc=%20%20%0ADjango%E6%98%AF%E4%B8%80%E4%B8%AA%E6%96%87%E6%A1%A3%E5%BE%88%E5%85%A8%E7%9A%84%E6%A1%86%E6%9E%B6%EF%BC%8C%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%97%B6%E5%80%99%E8%80%81%E6%98%AF%E9%81%87%E5%88%B0%E4%B8%80%E4%BA%9B%E5%9D%91%EF%BC%8C%E8%BF%99%E9%87%8C%E5%B0%B1%E9%A1%BA%E4%BE%BF%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8B%EF%BC%8C%E4%BB%A5%E4%BE%BF%E5%90%8E%E9%9D%A2%E4%BD%BF%E7%94%A8%EF%BC%8C%E5%90%8C%E6%97%B6%E4%B9%9F%E5%B8%8C%E6%9C%9B%E6%9C%AC%E6%96%87%E5%8F%AF%E4%BB%A5%E5%B8%AE%E5%8A%A9%E5%88%B0%E5%85%B6%E4%BB%96%E7%9A%84%E6%9C%8B%E5%8F%8B%E3%80%82%0A%0A%0A%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%9AmacOS%20Cataline%2010.15.3%20%0APython%EF%BC%9Apyenv%20%E5%AE%89%E8%A3%85%E7%9A%84&amp;pics=https%3A%2F%2Fimage.3001.net%2Fimages%2F20191031%2F15724874583730.png&amp;summary=&quot;%20%20%0ADjango%E6%98%AF%E4%B8%80%E4%B8%AA%E6%96%87%E6%A1%A3%E5%BE%88%E5%85%A8%E7%9A%84%E6%A1%86%E6%9E%B6%EF%BC%8C%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%97%B6%E5%80%99%E8%80%81%E6%98%AF%E9%81%87%E5%88%B0%E4%B8%80%E4%BA%9B%E5%9D%91%EF%BC%8C%E8%BF%99%E9%87%8C%E5%B0%B1%E9%A1%BA%E4%BE%BF%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8B%EF%BC%8C%E4%BB%A5%E4%BE%BF%E5%90%8E%E9%9D%A2%E4%BD%BF%E7%94%A8%EF%BC%8C%E5%90%8C%E6%97%B6%E4%B9%9F%E5%B8%8C%E6%9C%9B%E6%9C%AC%E6%96%87%E5%8F%AF%E4%BB%A5%E5%B8%AE%E5%8A%A9%E5%88%B0%E5%85%B6%E4%BB%96%E7%9A%84%E6%9C%8B%E5%8F%8B%E3%80%82%0A%0A%0A%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%9AmacOS%20Cataline%2010.15.3%20%0APython%EF%BC%9Apyenv%20%E5%AE%89%E8%A3%85%E7%9A%84&quot;" target="_blank"></a><a class="social-share-icon icon-wechat" href="javascript:"><div class="wechat-qrcode"><h4>微信扫一扫：分享</h4><div class="qrcode" title="https://www.sqlsec.com/2020/03/django.html"><canvas width="100" height="100" style="display: none;"></canvas><img alt="Scan me!" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAG6UlEQVR4Xu2d63LjOgyDk/d/6O6kuYws08BH2k7TLc+vPRNZF4IgSMpJr5fL5euy87+vr/sU1+t1c6bnmHHAOD76/Dn2Oc7NES0+760yhzIPOXvGvDcLNiDCkZwxTwNEeWi0qci7s56c9dZx/BFrKWNT9s4svv3/Hlu+GLJnkmpYaEDucI7grwBROjCirxgyel5EaUpzOu65ngKYfubOP7Pq6PM1IFOIaUBEIG+GmNTVhSyXkWQ/n4XbeS8NS0TMqb59dMjKGtyNb0BOYEiUnqqUlXjv1pgsQ+g+ImbOa9EkxyU8h4q6qldoDdGAPCp1KqAqZjYgdwvsseWPFIYU1DlURCxzIUAVrS5JyNQ32cp+3LcsDJ3QqlYBbWc0IEsrh4BQIKJxxAudhhDxd8JJUtAj9jG2O2h4ovY9pdv7jkMT40fx/B17o8YPNfeM9vs7Dv3fAvIVJe9FiLN5vauG1dZIbVA5BtVBJfiVdV/a3IDEAuuc5W2AuFSQhorshpWoK49z4THrrYp5zjbzWhTURQo8M8Qt2oBwiHcBooCgXpidgx6NaknWWSIWZzUkewanfdcnQ7LGzKLvqmwaluZxldpEhZYGBLjYn2bI0eEJ2HsxxGmYShYIyx2jKFOPuKt5pbrDa0irkNWAbEOibOMcibI83Toh2uH04sBa1BKQsMZN4oy9pUlWwIMX9BoQhwa4RW1AgBGj+EwKt2jqtzKEFIZ7QpCjrTLcHNoql0Dz+i7kZtvpqvZZVOBBeIqefYk6NQw1MJ0vM+5PAPJsv1c9I/IC6oXuWSLIzkGy4SYKWSRDqkSRaG/pt05IHdCArL8n42zyihTNEJ8h/AqGKGpXwgg59Lim8rjsZw4ScjXgaisSfm/7KIesBmQZlg4HJNIG5RlZLzxaXB0LZ4dRXVyaXOxhMe0iryp118siE1MBc6FCFXINyMM6DUjsRs5BiN0WGqK81Xm8qmEozV0M/t6s+bZstpYiKfxtDDmDiyy0AEbNxQZk+5vjVZ3dyhjly9ZVIaxcAqmeEE0ZiRe6vRE2RKxx7KVZaQMyhcIfB4R0e102pLqy7lnyebajuiclp89mu8i0R4a6vc5oDUgs/C6MheA3Q5bZ28cwROXRlXsIxSq6FknFnUir4pIkAVEVH2VIdB8uPZYvytHY7ULaVhvDHexPAjJ/P8QiWPxNLFrLuL5Slnlz8Vdhu6vCqw4XOXy5l4WzhgeADcj6R94akETNQbUjckyqkSEg88vWzpOj/o/KyV3qR0RXiW+WqXS8MzTp37nwGNlGvkpKs5AGZAkfTYbKgGTpS0XQpYrzwWjCQTrHtzNlQ4tKOGgkcHtDDGlA1t3eufHagATZG+1Ok1BM43/2DmYXQ6ptb7uoeK3SiWm2CFVJAw2t2T2dpiENyDb8xDaUZQtJUJV6Nt0krQ7n4dRrqSCTPbn4Tz2edBGixKQBeViAxv+3AqLa77QVnenljOkmTWNpMReJuhL66vjbfiiYmcL32zYNyPJyiQDYgAQUoewlBnZMjbT0NIaQt9+dED03TPtgajwRRpcYZMEa56s+61J9lTov7NuALE310YDQ7CJbIVMWqF5WtVhz7FJCT5MLyoZwnGJIA3I3GSkCK0A3IM5qg/H36OZpDInEl3gLrbadfcha4xxkvNubq9pnm9BwTfb2zcYzRN0d2gERpZmkwCKHdnv7GEAUG1yefkSunxVTKrDzvM7gNH0lzHDgR45XfuvEgTQv5sY3II8EovpeljNwA6KviLe0T2qIoq/q9dN7ABceiCY4PZrnoN0EN460TpzThlGB1CGuCJs334DcLXYIIBGVqCcrr3F5PX1WMYIkF45Rjhnu+REIJ+qIIQ3I9hsmBIwGZLDSn2SIoyHxIpXiZrut2XBK9TDSQVfDqLPTkJz+0mcDQlxuPQYDcsZfRxi3k+0Y0+PiA04v1DmHoqn2EZV6tNbqTp0axFF/bsXQVJiu/98CcuRf2KEg0T5U1OshgLkUWzmL2ptil9Mcp3WvszYg+35DRYVkFxVCB25APhQQSqkojNCeV1ZX5rVcFe0+J+EuO6Z69q11Dv1Ln1RDaObVgBR/k4pmPDNgrtCa53UszqaitAiljnZKYZg1UqZ304D4OxJ0p04LPVd0NSA/BEjlHkAlC7RpWA2dTshd1BijxO3fe66jT2FIA3L/TV9aoI4OcTogxPOdhxKxHD3ThViSftPKm7Ano7MNyMbPbTQgRZq4sEB0pWJ8NW90FLKPb5bPLzlQu2T7NC4DI0LojD+Hoi2BpWdU4+b9OlBx2G1AavCcDkhtW/en5oqXCp2i9iLzEL/a4PZNQkXFu7Nndl2GV/JzRre3AVm7SQPysMlvY8g/TU6jH1PzYOoAAAAASUVORK5CYII=" style="display: block;"></div><div class="help"><p>微信扫一扫即可分享！</p></div></div></a><a class="social-share-icon icon-weibo" href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fwww.sqlsec.com%2F2020%2F03%2Fdjango.html&amp;title=Django3%20%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E7%AC%94%E8%AE%B0%20%7C%20%E5%9B%BD%E5%85%89&amp;pic=https%3A%2F%2Fimage.3001.net%2Fimages%2F20191031%2F15724874583730.png&amp;appkey=" target="_blank"></a></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+
+
+
+
+</div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #42b983;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card aos-init" data-aos="fade-up">
+    <div id="vcomments" class="card-content v" style="display: grid"><div class="vwrap"><div class="vheader item3"><input name="nick" placeholder="昵称" class="vnick vinput" type="text"><input name="mail" placeholder="邮箱" class="vmail vinput" type="email"><input name="link" placeholder="网址(http://)" class="vlink vinput" type="text"></div><div class="vedit"><textarea id="veditor" class="veditor vinput" placeholder="听说帅的人都会来吐槽?"></textarea><div class="vctrl"><span class="vemoji-btn">表情</span> | <span class="vpreview-btn">预览</span></div><div class="vemojis" style="display:none;"><i name="grinning" title="grinning">😀</i><i name="smiley" title="smiley">😃</i><i name="smile" title="smile">😄</i><i name="grin" title="grin">😁</i><i name="laughing" title="laughing">😆</i><i name="sweat_smile" title="sweat_smile">😅</i><i name="joy" title="joy">😂</i><i name="blush" title="blush">😊</i><i name="innocent" title="innocent">😇</i><i name="wink" title="wink">😉</i><i name="relieved" title="relieved">😌</i><i name="heart_eyes" title="heart_eyes">😍</i><i name="kissing_heart" title="kissing_heart">😘</i><i name="kissing" title="kissing">😗</i><i name="kissing_smiling_eyes" title="kissing_smiling_eyes">😙</i><i name="kissing_closed_eyes" title="kissing_closed_eyes">😚</i><i name="yum" title="yum">😋</i><i name="stuck_out_tongue_winking_eye" title="stuck_out_tongue_winking_eye">😜</i><i name="stuck_out_tongue_closed_eyes" title="stuck_out_tongue_closed_eyes">😝</i><i name="stuck_out_tongue" title="stuck_out_tongue">😛</i><i name="sunglasses" title="sunglasses">😎</i><i name="smirk" title="smirk">😏</i><i name="unamused" title="unamused">😒</i><i name="disappointed" title="disappointed">😞</i><i name="pensive" title="pensive">😔</i><i name="worried" title="worried">😟</i><i name="confused" title="confused">😕</i><i name="persevere" title="persevere">😣</i><i name="confounded" title="confounded">😖</i><i name="tired_face" title="tired_face">😫</i><i name="weary" title="weary">😩</i><i name="angry" title="angry">😠</i><i name="rage" title="rage">😡</i><i name="no_mouth" title="no_mouth">😶</i><i name="neutral_face" title="neutral_face">😐</i><i name="expressionless" title="expressionless">😑</i><i name="hushed" title="hushed">😯</i><i name="frowning" title="frowning">😦</i><i name="anguished" title="anguished">😧</i><i name="open_mouth" title="open_mouth">😮</i><i name="astonished" title="astonished">😲</i><i name="dizzy_face" title="dizzy_face">😵</i><i name="flushed" title="flushed">😳</i><i name="scream" title="scream">😱</i><i name="fearful" title="fearful">😨</i><i name="cold_sweat" title="cold_sweat">😰</i><i name="cry" title="cry">😢</i><i name="disappointed_relieved" title="disappointed_relieved">😥</i><i name="sob" title="sob">😭</i><i name="sweat" title="sweat">😓</i><i name="sleepy" title="sleepy">😪</i><i name="sleeping" title="sleeping">😴</i><i name="mask" title="mask">😷</i><i name="smiling_imp" title="smiling_imp">😈</i><i name="smiley_cat" title="smiley_cat">😺</i><i name="smile_cat" title="smile_cat">😸</i><i name="joy_cat" title="joy_cat">😹</i><i name="heart_eyes_cat" title="heart_eyes_cat">😻</i><i name="smirk_cat" title="smirk_cat">😼</i><i name="kissing_cat" title="kissing_cat">😽</i><i name="scream_cat" title="scream_cat">🙀</i><i name="crying_cat_face" title="crying_cat_face">😿</i><i name="pouting_cat" title="pouting_cat">😾</i><i name="cat" title="cat">🐱</i><i name="mouse" title="mouse">🐭</i><i name="cow" title="cow">🐮</i><i name="monkey_face" title="monkey_face">🐵</i><i name="hand" title="hand">✋</i><i name="fist" title="fist">✊</i><i name="v" title="v">✌️</i><i name="point_up" title="point_up">👆</i><i name="point_down" title="point_down">👇</i><i name="point_left" title="point_left">👈</i><i name="point_right" title="point_right">👉</i><i name="facepunch" title="facepunch">👊</i><i name="wave" title="wave">👋</i><i name="clap" title="clap">👏</i><i name="open_hands" title="open_hands">👐</i><i name="+1" title="+1">👍</i><i name="-1" title="-1">👎</i><i name="ok_hand" title="ok_hand">👌</i><i name="pray" title="pray">🙏</i><i name="ear" title="ear">👂</i><i name="eyes" title="eyes">👀</i><i name="nose" title="nose">👃</i><i name="lips" title="lips">👄</i><i name="tongue" title="tongue">👅</i><i name="heart" title="heart">❤️</i><i name="cupid" title="cupid">💘</i><i name="sparkling_heart" title="sparkling_heart">💖</i><i name="star" title="star">⭐️</i><i name="sparkles" title="sparkles">✨</i><i name="zap" title="zap">⚡️</i><i name="sunny" title="sunny">☀️</i><i name="cloud" title="cloud">☁️</i><i name="snowflake" title="snowflake">❄️</i><i name="umbrella" title="umbrella">☔️</i><i name="coffee" title="coffee">☕️</i><i name="airplane" title="airplane">✈️</i><i name="anchor" title="anchor">⚓️</i><i name="watch" title="watch">⌚️</i><i name="phone" title="phone">☎️</i><i name="hourglass" title="hourglass">⌛️</i><i name="email" title="email">✉️</i><i name="scissors" title="scissors">✂️</i><i name="black_nib" title="black_nib">✒️</i><i name="pencil2" title="pencil2">✏️</i><i name="x" title="x">❌</i><i name="recycle" title="recycle">♻️</i><i name="white_check_mark" title="white_check_mark">✅</i><i name="negative_squared_cross_mark" title="negative_squared_cross_mark">❎</i><i name="m" title="m">Ⓜ️</i><i name="i" title="i">ℹ️</i><i name="tm" title="tm">™️</i><i name="copyright" title="copyright">©️</i><i name="registered" title="registered">®️</i></div><div class="vinput vpreview" style="display:none;"></div></div><div class="vcontrol"><div class="col col-20" title="Markdown is supported"><a href="https://segmentfault.com/markdown" target="_blank"><svg class="markdown" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M14.85 3H1.15C.52 3 0 3.52 0 4.15v7.69C0 12.48.52 13 1.15 13h13.69c.64 0 1.15-.52 1.15-1.15v-7.7C16 3.52 15.48 3 14.85 3zM9 11H7V8L5.5 9.92 4 8v3H2V5h2l1.5 2L7 5h2v6zm2.99.5L9.5 8H11V5h2v3h1.5l-2.51 3.5z"></path></svg></a></div><div class="col col-80 text-right"><button type="button" title="Cmd|Ctrl+Enter" class="vsubmit vbtn">回复</button></div></div><div style="display:none;" class="vmark"></div></div><div class="vinfo" style="display:none;"><div class="vcount col"></div></div><div class="vlist"></div><div class="vempty" style="display:block;">快来做第一个评论的人吧~</div><div class="vpage txt-center"></div><div class="info"><div class="power txt-right">Powered By <a href="https://valine.js.org" target="_blank">Valine</a><br>v1.3.10</div></div></div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="https://html.sqlsec.com/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'jTojmNgsJXy2kLqEYGJS6PoB-gzGzoHsz',
+        appKey: 'ds8WGWCWtYDnVT4QnyN2a3tf',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'false' === 'true',
+        avatar: 'identicon',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: '听说帅的人都会来吐槽?'
+    });
+</script>
+
+
+
+
+
+<article id="prenext-posts" class="prev-next articles" style="width: 970px;">
+    <div class="row article-row">
+
+        <div class="article col s12 m6 aos-init" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2020/03/django.html">
+                    <div class="card-image">
+
+                        <img src="https://image.3001.net/images/20200304/15832956271308.jpg" class="responsive-img" alt="Django3 学习记录笔记">
+
+                        <span class="card-title">Django3 学习记录笔记</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+
+
+Django是一个文档很全的框架，学习的时候老是遇到一些坑，这里就顺便记录一下，以便后面使用，同时也希望本文可以帮助到其他的朋友。
+
+
+开发环境操作系统：macOS Cataline 10.15.3
+Python：pyenv 安装的
+
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-04
+                            </span>
+                        <span class="publish-author">
+
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+
+                            <a href="/ggs/Python/" class="post-category">
+                                    Python
+                                </a>
+
+
+                        </span>
+                    </div>
+                </div>
+
+
+                <div class="card-action article-tags">
+
+                    <a href="/tags/Python/">
+                        <span class="chip tag-color">Python</span>
+                    </a>
+
+                    <a href="/tags/Django/">
+                        <span class="chip tag-color">Django</span>
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="article col s12 m6 aos-init" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/01/sinsiu.html">
+                    <div class="card-image">
+
+                        <img src="https://image.3001.net/images/20200122/15796972174008.jpg" class="responsive-img" alt="PHP代码审计初次尝试之新秀企业网站系统">
+
+                        <span class="card-title">PHP代码审计初次尝试之新秀企业网站系统</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+
+                            国光的初次代码审计尝试，先找个小点的CMS练练手入门一下，顺便记录一下水一篇文章，233333 嗝
+
+
+系统介绍CMS名称：新秀企业网站系统PHP版
+官网：www.sinsiu.com
+版本：这里国光用的1.0 正式版 （官网最新的版本有毒
+
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-01-21
+                            </span>
+                        <span class="publish-author">
+
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+
+                            <a href="/ggs/Web/" class="post-category">
+                                    Web
+                                </a>
+
+
+                        </span>
+                    </div>
+                </div>
+
+                <div class="card-action article-tags">
+
+                    <a href="/tags/PHP/">
+                        <span class="chip tag-color">PHP</span>
+                    </a>
+
+                    <a href="/tags/%E5%AE%A1%E8%AE%A1/">
+                        <span class="chip tag-color">审计</span>
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('240')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 国光<br />'
+            + '文章作者: 国光<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '咳咳又想白嫖文章？本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 横幅广告 -->
+<ins class="adsbygoogle" style="display: block; height: 280px;" data-ad-client="ca-pub-5412792799188449" data-ad-slot="1398408001" data-ad-format="auto" data-full-width-responsive="true" data-adsbygoogle-status="done"><ins id="aswift_0_expand" style="display:inline-table;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:915px;background-color:transparent;"><ins id="aswift_0_anchor" style="display:block;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:915px;background-color:transparent;"><iframe width="915" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;border:0px;width:915px;height:280px;"></iframe></ins></ins></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"><ol class="toc-list "><li class="toc-list-item is-active-li"><a href="#toc-heading-1" class="toc-link node-name--H1  is-active-link">开发环境</a></li><li class="toc-list-item"><a href="#toc-heading-2" class="toc-link node-name--H1 ">相关依赖</a><ol class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#toc-heading-3" class="toc-link node-name--H2 ">MySQL</a></li><li class="toc-list-item"><a href="#toc-heading-4" class="toc-link node-name--H2 ">pillow</a></li></ol></li><li class="toc-list-item"><a href="#toc-heading-5" class="toc-link node-name--H1 ">目录配置</a><ol class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#toc-heading-6" class="toc-link node-name--H2 ">templates</a></li><li class="toc-list-item"><a href="#toc-heading-7" class="toc-link node-name--H2 ">static</a></li><li class="toc-list-item"><a href="#toc-heading-8" class="toc-link node-name--H2 ">apps</a></li><li class="toc-list-item"><a href="#toc-heading-9" class="toc-link node-name--H2 ">media</a></li></ol></li><li class="toc-list-item"><a href="#toc-heading-10" class="toc-link node-name--H1 ">实用插件</a><ol class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#toc-heading-11" class="toc-link node-name--H2 ">验证码</a></li><li class="toc-list-item"><a href="#toc-heading-12" class="toc-link node-name--H2 ">分页</a></li><li class="toc-list-item"><a href="#toc-heading-13" class="toc-link node-name--H2 ">导入导出</a></li></ol></li><li class="toc-list-item"><a href="#toc-heading-14" class="toc-link node-name--H1 ">Admin 配置</a><ol class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#toc-heading-15" class="toc-link node-name--H2 ">修改后台名称</a></li><li class="toc-list-item"><a href="#toc-heading-16" class="toc-link node-name--H2 ">图片显示</a></li></ol></li></ol></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="https://html.sqlsec.com/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('240')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 国光<br />'
+            + '文章作者: 国光<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '咳咳又想白嫖文章？本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 横幅广告 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-5412792799188449"
+     data-ad-slot="1398408001"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+    
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large tag-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="https://html.sqlsec.com/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h1, h2, h3, h4, h5'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4, h5').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">年份</span>
+            <a href="https://www.sqlsec.com" target="_blank">国光</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank" rel="nofollow">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank" rel="nofollow">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">206k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                &nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                &nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    window.setTimeout("siteTime()", 1000);
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2016";
+                    var startMonth = "4";
+                    var startDate = "23";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 ";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 ";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+            <span id="icp"><img src="/medias/icp.png" style="vertical-align: text-bottom;" />
+                <a href="http://beian.miit.gov.cn" target="_blank" rel="nofollow">苏ICP备19074591号</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+    <a href="mailto:admin@sqlsec.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+    <a href="http://www.sqlsec.com/baidusitemap.xml" class="tooltipped" target="_blank" data-tooltip="网站的SiteMap: http://www.sqlsec.com/baidusitemap.xml" data-position="top" data-delay="50">
+        <i class="fas fa-sitemap"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+    <a href="/avs/" class="tooltipped" target="_blank" data-tooltip="文章更新动态" data-position="top" data-delay="50">
+        <i class="far fa-calendar-alt"></i>
+    </a>
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="https://html.sqlsec.com/materialize.min.js"></script>
+    <script src="https://html.sqlsec.com/masonry.pkgd.min.js"></script>
+    <script src="https://html.sqlsec.com/aos.js"></script>
+    <script src="https://html.sqlsec.com/scrollProgress.min.js"></script>
+    <script src="https://html.sqlsec.com/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="https://html.sqlsec.com/clicklove.js" async="async"></script>
+    
+    
+    <script async src="https://html.sqlsec.com/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i["DaoVoiceObject"] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            a.charset = "utf-8";
+            m.parentNode.insertBefore(a, m)
+        })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') +
+            "//widget.daovoice.io/widget/6984b559.js", "daovoice")
+        daovoice('init', {
+            app_id: ""
+        });
+        daovoice('update');
+    </script>
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="https://html.sqlsec.com/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

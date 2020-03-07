@@ -2,7 +2,7 @@ import random
 from django.shortcuts import render
 from django.views.generic.base import View
 from django.conf import settings
-from .models import Links
+from .models import Links, Article
 
 
 def global_setting(request):
@@ -24,10 +24,13 @@ def global_setting(request):
 
 class Index(View):
     """
-    测试首页能否正常加载
+    首页展示
     """
     def get(self, request):
-        return render(request, 'index.html', {})
+        all_articles = Article.objects.all()
+        return render(request, 'index.html', {
+            'all_articles': all_articles,
+        })
 
 
 class Friends(View):
@@ -43,3 +46,10 @@ class Friends(View):
         })
 
 
+class Detail(View):
+    """
+    文章详情页
+    """
+    def get(self, request, av_id):
+        return render(request, 'detail.html', {
+        })

@@ -3,7 +3,7 @@ from django.urls import path, re_path, include
 from django.conf.urls.static import static
 from django.conf import settings
 
-from blog.views import Index, Friends
+from blog.views import Index, Friends, Detail
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -12,6 +12,9 @@ urlpatterns = [
     path('friends/', Friends.as_view(), name='friends'),
     # 后台 markdown 编辑器配置
     path('mdeditor/', include('mdeditor.urls')),
+
+    # 文章详情
+    re_path(r'article/av(?P<av_id>)\d+', Detail.as_view(), name='detail')
 ]
 
 # 设置后台名称
