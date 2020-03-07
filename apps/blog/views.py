@@ -1,6 +1,8 @@
+import random
 from django.shortcuts import render
 from django.views.generic.base import View
 from django.conf import settings
+from .models import Links
 
 
 def global_setting(request):
@@ -27,5 +29,17 @@ class Index(View):
     def get(self, request):
         return render(request, 'index.html', {})
 
+
+class Friends(View):
+    """
+    友链链接展示
+    """
+    def get(self, request):
+        links = Links.objects.all()
+        card_num = random.randint(1, 10)
+        return render(request, 'friends.html', {
+            'links': links,
+            'card_num': card_num,
+        })
 
 

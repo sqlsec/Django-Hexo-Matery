@@ -1,7 +1,6 @@
 from datetime import datetime
 from django.db import models
 from django.utils.html import format_html
-
 from mdeditor.fields import MDTextField
 
 
@@ -58,7 +57,7 @@ class Article(models.Model):
 
     def cover_admin(self):
         return format_html(
-            '<img src="{}" width="400px" height="250px"/>',
+            '<img src="{}" width="440px" height="275px"/>',
             self.cover,
         )
 
@@ -95,10 +94,11 @@ class Links(models.Model):
     """
     友情链接
     """
-    title = models.CharField(max_length=50, verbose_name='友情链接标题')
-    url = models.URLField(verbose_name='友情链接地址')
-    image = models.CharField(max_length=200, default='https://image.3001.net/images/20190330/1553875722169.jpg', verbose_name='友情链接头像')
-    index = models.IntegerField(default=999, verbose_name='排列顺序(从小到大)')
+    title = models.CharField(max_length=50, verbose_name='标题')
+    url = models.URLField(verbose_name='地址')
+    desc = models.TextField(verbose_name='描述', max_length=250)
+    image = models.URLField(default='https://image.3001.net/images/20190330/1553875722169.jpg', verbose_name='头像')
+
 
     def avatar_data(self):
         return format_html(
@@ -112,8 +112,8 @@ class Links(models.Model):
             self.image,
         )
 
-    avatar_data.short_description = '友链头像'
-    avatar_admin.short_description = '友链头像'
+    avatar_data.short_description = '头像'
+    avatar_admin.short_description = '头像预览'
 
     class Meta:
         verbose_name = '友链'

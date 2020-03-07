@@ -3,12 +3,15 @@ from django.urls import path, re_path, include
 from django.conf.urls.static import static
 from django.conf import settings
 
-from blog.views import Index
+from blog.views import Index, Friends
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', Index.as_view(), name='index'),
-    path('mdeditor/', include('mdeditor.urls'))
+    # 友情链接
+    path('friends/', Friends.as_view(), name='friends'),
+    # 后台 markdown 编辑器配置
+    path('mdeditor/', include('mdeditor.urls')),
 ]
 
 # 设置后台名称

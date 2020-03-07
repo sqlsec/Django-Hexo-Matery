@@ -1,6 +1,8 @@
 from django.contrib import admin
-from import_export.admin import ImportExportModelAdmin, ImportExportActionModelAdmin
+from django.forms import TextInput, Textarea
+from django.db import models
 
+from import_export.admin import ImportExportModelAdmin, ImportExportActionModelAdmin
 from .models import Article, Category, Tag, Comment, Links
 
 
@@ -22,6 +24,11 @@ class ArticleAdmin(ImportExportModelAdmin):
             'fields': ('cover', 'cover_admin', 'desc', 'is_recommend', 'click_count', 'tag', 'category', 'add_time'),
         }),
     )
+
+    formfield_overrides = {
+        models.CharField: {'widget': TextInput(attrs={'size': '59'})},
+        models.TextField: {'widget': Textarea(attrs={'rows': 4, 'cols': 59})},
+    }
 
 
 # 分类
@@ -49,12 +56,18 @@ class CommentAdmin(ImportExportModelAdmin):
 # 友链
 @admin.register(Links)
 class LinksAdmin(ImportExportModelAdmin):
-    list_display = ('title', 'url', 'avatar_data')
-    search_fields = ('title', 'url')
+    list_display = ('title', 'url', 'avatar_data', 'desc')
+    search_fields = ('title', 'url', 'desc')
     readonly_fields = ('avatar_admin', )
+    list_editable = ('url',)
 
     fieldsets = (
         (None, {
-            'fields': ('title', 'url', 'image', 'avatar_admin')
+            'fields': ('title', 'url', 'desc', 'avatar_admin', 'image', )
         }),
     )
+
+    formfield_overrides = {
+        models.CharField: {'widget': TextInput(attrs={'size': '59'})},
+        models.TextField: {'widget': Textarea(attrs={'rows': 4, 'cols': 59})},
+    }
