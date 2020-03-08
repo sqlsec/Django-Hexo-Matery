@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'mdeditor',
+    'pure_pagination',
 ]
 
 # 中间件相关

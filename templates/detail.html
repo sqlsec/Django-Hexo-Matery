@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load custom_tag %}
 {% load static %}
-{% block title %}文章详情{% endblock %}
+{% block title %}{{ article.title }} | {% endblock %}
 
 {% block banner %}
 <div class="bg-cover pd-header post-cover">
@@ -116,7 +116,6 @@
 
 {% block contents %}
 <main class="post-container content">
-    <link rel="stylesheet" href="https://html.sqlsec.com/tocbot.css">
     <style>
         #articleContent h1::before,
         #articleContent h2::before,
@@ -482,13 +481,13 @@
                 });
             </script>
             <!-- 代码块功能依赖 -->
-            <script type="text/javascript" src="{% static 'libs/codeBlock/codeBlockFuction.js' %}"></script>
+            <script type="text/javascript" src="{% static 'codeBlock/codeBlockFuction.js' %}"></script>
             <!-- 代码语言 -->
-            <script type="text/javascript" src="{% static 'libs/codeBlock/codeLang.js' %}"></script>
+            <script type="text/javascript" src="{% static 'codeBlock/codeLang.js' %}"></script>
             <!-- 代码块复制 -->
-            <script type="text/javascript" src="{% static 'libs/codeBlock/codeCopy.js' %}"></script>
+            <script type="text/javascript" src="{% static 'codeBlock/codeCopy.js' %}"></script>
             <!-- 代码块收缩 -->
-            <script type="text/javascript" src="{% static 'libs/codeBlock/codeShrink.js' %}"></script>
+            <script type="text/javascript" src="{% static 'codeBlock/codeShrink.js' %}"></script>
             <!-- 代码块折行 -->
         </div>
         <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
@@ -505,7 +504,7 @@
             <i class="fas fa-list-ul"></i>
         </a>
     </div>
-    <script src="https://html.sqlsec.com/tocbot.min.js"></script>
+    <script src="{% static 'js/tocbot.min.js' %}"></script>
     <script>
         $(function () {
             tocbot.init({

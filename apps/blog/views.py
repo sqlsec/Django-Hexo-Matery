@@ -1,10 +1,12 @@
 import random
 import mistune
-import markdown
 from django.shortcuts import render
 from django.views.generic.base import View
 from django.conf import settings
+from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
+
 from .models import Links, Article
+
 
 
 def global_setting(request):
@@ -29,9 +31,21 @@ class Index(View):
     首页展示
     """
     def get(self, request):
-        all_articles = Article.objects.all()
+        all_articles = Article.objects.all().order_by('-add_time')
+        top_articles = Article.objects.filter(is_recommend=1)
+
+        # f首页分页功能
+        try:
+            page = request.GET.get('page', 1)
+        except PageNotAnInteger:
+            page = 1
+
+        p = Paginator(all_articles, 9, request=request)
+        articles = p.page(page)
+
         return render(request, 'index.html', {
-            'all_articles': all_articles,
+            'all_articles': articles,
+            'top_articles': top_articles
         })
 
 
