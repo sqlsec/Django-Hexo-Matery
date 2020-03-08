@@ -9,7 +9,7 @@ from .models import Article, Category, Tag, Comment, Links
 # 文章
 @admin.register(Article)
 class ArticleAdmin(ImportExportModelAdmin):
-    list_display = ('title', 'category', 'cover_data', 'is_recommend', 'add_time')
+    list_display = ('title', 'category', 'cover_data', 'is_recommend', 'add_time', 'update_time')
     search_fields = ('title', 'desc', 'content')
     list_filter = ('category', 'tag', 'add_time')
     list_editable = ('category', 'is_recommend')

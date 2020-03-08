@@ -1,4 +1,6 @@
 import random
+import mistune
+import markdown
 from django.shortcuts import render
 from django.views.generic.base import View
 from django.conf import settings
@@ -50,6 +52,13 @@ class Detail(View):
     """
     文章详情页
     """
-    def get(self, request, av_id):
+    def get(self, request, pk):
+        article = Article.objects.get(id=int(pk))
+        article.viewed()
+        mk = mistune.Markdown()
+        output = mk(article.content)
+
         return render(request, 'detail.html', {
+            'article': article,
+            'detail_html': output
         })

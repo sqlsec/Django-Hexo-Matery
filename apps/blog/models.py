@@ -45,7 +45,7 @@ class Article(models.Model):
     click_count = models.IntegerField(default=0, verbose_name='点击次数')
     is_recommend = models.BooleanField(default=False, verbose_name='是否推荐')
     add_time = models.DateTimeField(default=datetime.now, verbose_name='发布时间')
-    update_time = models.DateTimeField(auto_now_add=True, verbose_name='更新时间')
+    update_time = models.DateTimeField(auto_now=True, verbose_name='更新时间')
     category = models.ForeignKey(Category, blank=True, null=True, verbose_name='文章分类', on_delete=models.CASCADE)
     tag = models.ManyToManyField(Tag, verbose_name='文章标签')
 
@@ -60,6 +60,13 @@ class Article(models.Model):
             '<img src="{}" width="440px" height="275px"/>',
             self.cover,
         )
+
+    def viewed(self):
+        """
+        增加阅读数
+        """
+        self.click_count += 1
+        self.save(update_fields=['click_count'])
 
     cover_data.short_description = '文章封面'
     cover_admin.short_description = '文章封面'

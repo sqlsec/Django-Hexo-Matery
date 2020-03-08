@@ -15,16 +15,17 @@
     <title>{% block title %}{% endblock %}{{ SITE_NAME }}</title>
     <link rel="icon" type="image/png" href="https://image.3001.net/images/20191031/15724874583730.png">
 
-    <link rel="stylesheet" type="text/css" href="https://html.sqlsec.com/all.css">
-    <link rel="stylesheet" type="text/css" href="https://html.sqlsec.com/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="https://html.sqlsec.com/aos.css">
-    <link rel="stylesheet" type="text/css" href="https://html.sqlsec.com/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="https://html.sqlsec.com/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/all.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/materialize.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/aos.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/animate.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/lightgallery.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/matery.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/my.css' %}">
-
-    <script src="https://html.sqlsec.com/jquery-2.2.0.min.js"></script>
-<link rel="stylesheet" href="{% static 'css/prism-a11y-dark.css' %}" type="text/css"></head>
+    {% block css %}{% endblock %}
+    {% block js %}{% endblock %}
+    <script src="{% static 'js/jquery-2.2.0.min.js' %}"></script>
+    </head>
 <body>
     <header class="navbar-fixed">
         <nav id="headNav" class="bg-color nav-transparent">
@@ -225,14 +226,9 @@
             };
         });
     </script>
-    <main class="content" class="col s12 m12 l9">
-        <!-- 首页卡片 -->
-        {% block indexCard %}
-        {% endblock %}
 
-        <!-- 所有文章卡片 -->
-        {% block contents %}
-        {% endblock %}
+    {% block contents %}
+    {% endblock %}
 
 
     <!-- 翻页按钮 -->
@@ -258,15 +254,13 @@
 
 
 
-            <span id="busuanzi_container_site_pv">
-                &nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
-                    class="white-color"></span>&nbsp;次
+            <span>
+                &nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span class="white-color"></span>&nbsp;次
             </span>
 
 
-            <span id="busuanzi_container_site_uv">
-                &nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
-                    class="white-color"></span>&nbsp;人
+            <span>
+                &nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span class="white-color"></span>&nbsp;人
             </span>
 
             <br>
@@ -388,31 +382,14 @@
         </a>
     </div>
 
-    <script src="https://html.sqlsec.com/materialize.min.js"></script>
-    <script src="https://html.sqlsec.com/masonry.pkgd.min.js"></script>
-    <script src="https://html.sqlsec.com/aos.js"></script>
-    <script src="https://html.sqlsec.com/scrollProgress.min.js"></script>
-    <script src="https://html.sqlsec.com/lightgallery-all.min.js"></script>
+    <script src="{% static '/js/materialize.min.js' %}"></script>
+    <script src="{% static '/js/masonry.pkgd.min.js' %}"></script>
+    <script src="{% static '/js/aos.js' %}"></script>
+    <script src="{% static '/js/scrollProgress.min.js' %}"></script>
+    <script src="{% static '/js/lightgallery-all.min.js' %}"></script>
     <script src="{% static '/js/matery.js' %}"></script>
-    <script src="https://html.sqlsec.com/clicklove.js" async="async"></script>
-    <script>
-        (function (i, s, o, g, r, a, m) {
-            i["DaoVoiceObject"] = r;
-            i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
-            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            a.charset = "utf-8";
-            m.parentNode.insertBefore(a, m)
-        })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') +
-            "//widget.daovoice.io/widget/6984b559.js", "daovoice")
-        daovoice('init', {
-            app_id: ""
-        });
-        daovoice('update');
-    </script>
-    <script src="https://html.sqlsec.com/instantpage.js" type="module"></script>
+    <script src="{% static '/js/clicklove.js' %}" async="async"></script>
+    <script src="{% static '/js/instantpage.js' %}" type="module"></script>
+    <script src="{% static 'js/prism.js' %}"></script>
 </body>
 </html>

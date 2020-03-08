@@ -14,7 +14,7 @@ urlpatterns = [
     path('mdeditor/', include('mdeditor.urls')),
 
     # 文章详情
-    re_path(r'article/av(?P<av_id>)\d+', Detail.as_view(), name='detail')
+    re_path(r'article/av(?P<pk>\d+)', Detail.as_view(), name='detail')
 ]
 
 # 设置后台名称
