@@ -1,0 +1,179 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block banner %}
+<div class="bg-cover pd-header about-cover">
+    {% include 'banner.html' %}
+</div>
+{% endblock %}
+
+{% block contents %}
+<main class="content" style="min-height: 783px;">
+    <div class="container archive-calendar">
+    <div class="card">
+        <div id="post-calendar" class="card-content" _echarts_instance_="ec_1583720716602" style="-webkit-tap-highlight-color: transparent; user-select: none; position: relative;"><div style="position: relative; overflow: hidden; width: 772px; height: 177px; padding: 0px; margin: 0px; border-width: 0px; cursor: pointer;"><canvas data-zr-dom-id="zr_0" width="1544" height="354" style="position: absolute; left: 0px; top: 0px; width: 772px; height: 177px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div><div style="position: absolute; display: none; border-style: solid; white-space: nowrap; z-index: 9999999; transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0s, top 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0s; background-color: rgb(85, 85, 85); border-width: 1px; border-color: rgb(119, 119, 119); border-radius: 4px; color: rgb(255, 255, 255); font: 14px / 21px sans-serif; padding: 10px; left: 552px; top: 105px; pointer-events: none;"><div style="font-size: 14px;">2020-02-16：0</div></div></div>
+    </div>
+</div>
+
+    <script type="text/javascript" src="{% static 'js/echarts.min.js' %}"></script>
+    <script type="text/javascript">
+        let myChart = echarts.init(document.getElementById('post-calendar'));
+        let option = {
+            title: {
+                top: 0,
+                text: '文章日历',
+                left: 'center',
+                textStyle: {
+                    color: '#3C4858'
+                }
+            },
+            tooltip: {
+                padding: 10,
+                backgroundColor: '#555',
+                borderColor: '#777',
+                borderWidth: 1,
+                formatter: function (obj) {
+                    var value = obj.value;
+                    return '<div style="font-size: 14px;">' + value[0] + '：' + value[1] + '</div>';
+                }
+            },
+            visualMap: {
+                show: true,
+                showLabel: true,
+                categories: [0, 1, 2, 3, 4],
+                calculable: true,
+                inRange: {
+                    symbol: 'rect',
+                    color: ['#ebedf0', '#c6e48b', '#7bc96f', '#239a3b', '#196127']
+                },
+                itemWidth: 12,
+                itemHeight: 12,
+                orient: 'horizontal',
+                left: 'center',
+                bottom: 0
+            },
+            calendar: [{
+                left: 'center',
+                range: ["2019-03-04", "2020-03-04"],
+                cellSize: [13, 13],
+                splitLine: {
+                    show: false
+                },
+                itemStyle: {
+                    color: '#196127',
+                    borderColor: '#fff',
+                    borderWidth: 2
+                },
+                yearLabel: {
+                    show: false
+                },
+                monthLabel: {
+                    nameMap: 'cn',
+                    fontSize: 11
+                },
+                dayLabel: {
+                    formatter: '{start}  1st',
+                    nameMap: 'cn',
+                    fontSize: 11
+                }
+            }],
+            series: [{
+                type: 'heatmap',
+                coordinateSystem: 'calendar',
+                calendarIndex: 0,
+                data: {{ date_list | safe }}
+            }]
+
+        };
+        myChart.setOption(option);
+    </script>
+
+    <div id="cd-timeline" class="container">
+        {% for article in all_articles.object_list %}
+        <div class="cd-timeline-block">
+            <div class="cd-timeline-img year aos-init aos-animate" data-aos="zoom-in-up">
+                <a href="#">2020</a>
+            </div>
+
+            <div class="cd-timeline-img month aos-init aos-animate" data-aos="zoom-in-up">
+                <a href="#">03</a>
+            </div>
+
+            <div class="cd-timeline-img day aos-init aos-animate" data-aos="zoom-in-up">
+                <span>04</span>
+            </div>
+            <article class="cd-timeline-content aos-init aos-animate" data-aos="fade-up">
+                <div class="article col s12 m6">
+                    <div class="card">
+                        <a href="{% url 'detail' article.id %}">
+                            <div class="card-image">
+
+                                <img src="{{ article.cover }}" class="responsive-img" alt="{{ article.title }}">
+
+                                <span class="card-title">{{ article.title }}</span>
+                            </div>
+                        </a>
+                        <div class="card-content article-content">
+                            <div class="summary block-with-text">
+                                {{ article.desc }}
+                            </div>
+                            <div class="publish-info">
+                                <span class="publish-date">
+                                    <i class="far fa-clock fa-fw icon-date"></i>{{ article.add_time }}
+                                </span>
+                                <span class="publish-author">
+                                    <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                    <a href="/ggs/Python/" class="post-category">
+                                    {{ article.category }}
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="card-action article-tags">
+                            {% for tag in  article.tag.all %}
+                                <a href="/tags/Python/">
+                                    <span class="chip tag-color">{{ tag }}</span>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+        {% endfor %}
+    </div>
+
+</main>
+{% endblock %}
+
+{% block pagination %}
+    <div class="container paging">
+        <div class="row">
+            <div class="col s6 m4 l4">
+                {% if all_articles.has_previous %}
+                <a href="?{{ all_articles.previous_page_number.querystring }}" class="left btn-floating btn-large waves-effect waves-light left-color">
+                    {% else %}
+                <a class="left btn-floating btn-large disabled">
+                {% endif %}
+                    <i class="fas fa-angle-left"></i>
+                </a>
+            </div>
+
+
+            <div class="page-info col m4 l4 hide-on-small-only">
+                <div class="center-align b-text-gray">{{ all_articles.number }} / {{ all_articles.pages | last }}</div>
+            </div>
+
+            <div class="col s6 m4 l4">
+                {% if all_articles.has_next %}
+                <a href="?{{ all_articles.next_page_number.querystring }}" class="right btn-floating btn-large waves-effect waves-light right-color">
+                {% else%}
+                <a class="right btn-floating btn-large disabled">
+                {% endif %}
+                    <i class="fas fa-angle-right"></i>
+                </a>
+            </div>
+
+        </div>
+    </div>
+    {% endblock %}

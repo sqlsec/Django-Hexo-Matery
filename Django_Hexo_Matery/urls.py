@@ -3,18 +3,25 @@ from django.urls import path, re_path, include
 from django.conf.urls.static import static
 from django.conf import settings
 
-from blog.views import Index, Friends, Detail
+from blog.views import Index, Friends, Detail, Archive
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    # 首页
     path('', Index.as_view(), name='index'),
+
     # 友情链接
     path('friends/', Friends.as_view(), name='friends'),
+
     # 后台 markdown 编辑器配置
     path('mdeditor/', include('mdeditor.urls')),
 
     # 文章详情
-    re_path(r'article/av(?P<pk>\d+)', Detail.as_view(), name='detail')
+    re_path(r'article/av(?P<pk>\d+)', Detail.as_view(), name='detail'),
+
+    # 文章归档
+    path('article/', Archive.as_view(), name='archive')
 ]
 
 # 设置后台名称

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block banner %}
-<div id="page" class="carousel carousel-slider center index-cover" data-indicators="true" style="margin-top: -64px;">
+    {% ifequal all_articles.number 1 %}
+    <div id="page" class="carousel carousel-slider center index-cover" data-indicators="true" style="margin-top: -64px;">
     <div class="carousel-item red white-text bg-cover about-cover">
         <div class="container">
             {% include 'banner.html' %}
@@ -28,10 +29,16 @@
         </div>
     </div>
 </div>
+        {% else %}
+        <div class="bg-cover pd-header about-cover">
+            {% include 'banner.html' %}
+        </div>
+    {% endifequal %}
 {% endblock %}
 
 {% block contents %}
-<div id="indexCard" class="index-card">
+    {% ifequal all_articles.number 1 %}
+    <div id="indexCard" class="index-card">
     <div class="container ">
         <div class="card">
             <div class="card-content">
@@ -77,9 +84,10 @@
             </div>
         </div>
     </div>
-</div>
+    </div>
+    {% endifequal %}
 
-<main class="content" class="col s12 m12 l9">
+    <main class="content" class="col s12 m12 l9">
     <article id="articles" class="container articles">
         <div class="row article-row">
             {% for article in all_articles.object_list %}
