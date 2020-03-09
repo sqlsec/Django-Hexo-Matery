@@ -3,7 +3,7 @@ from django.urls import path, re_path, include
 from django.conf.urls.static import static
 from django.conf import settings
 
-from blog.views import Index, Friends, Detail, Archive
+from blog.views import Index, Friends, Detail, Archive, Category_List
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -21,7 +21,10 @@ urlpatterns = [
     re_path(r'article/av(?P<pk>\d+)', Detail.as_view(), name='detail'),
 
     # 文章归档
-    path('article/', Archive.as_view(), name='archive')
+    path('article/', Archive.as_view(), name='archive'),
+
+    # 分类统计
+    path(r'category/', Category_List.as_view(), name='category')
 ]
 
 # 设置后台名称

@@ -53,7 +53,7 @@
             },
             calendar: [{
                 left: 'center',
-                range: ["2019-03-04", "2020-03-04"],
+                range: ["{{ begin }}", "{{ end }}"],
                 cellSize: [13, 13],
                 splitLine: {
                     show: false
@@ -91,15 +91,15 @@
         {% for article in all_articles.object_list %}
         <div class="cd-timeline-block">
             <div class="cd-timeline-img year aos-init aos-animate" data-aos="zoom-in-up">
-                <a href="#">2020</a>
+                <span>{{ article.add_time | date:"Y" }}</span>
             </div>
 
             <div class="cd-timeline-img month aos-init aos-animate" data-aos="zoom-in-up">
-                <a href="#">03</a>
+                <span>{{ article.add_time | date:"m" }}</span>
             </div>
 
             <div class="cd-timeline-img day aos-init aos-animate" data-aos="zoom-in-up">
-                <span>04</span>
+                <span>{{ article.add_time | date:"d" }}</span>
             </div>
             <article class="cd-timeline-content aos-init aos-animate" data-aos="fade-up">
                 <div class="article col s12 m6">

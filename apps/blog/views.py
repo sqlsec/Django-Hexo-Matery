@@ -121,5 +121,22 @@ class Archive(View):
 
         return render(request, 'archive.html', {
             'all_articles': articles,
-            'date_list': date_list
+            'date_list': date_list,
+            'end': str(end),
+            'begin': str(begin)
+        })
+
+
+class Category_List(View):
+    def get(self, request):
+        categorys = Category.objects.all()
+        nums_list = []
+        for i in categorys:
+            nums_list.append(len(i.article_set.all()))
+
+        nums_list.sort(reverse=True)
+
+        return render(request, 'category.html', {
+            'categorys': categorys,
+            'nums_list': nums_list
         })
