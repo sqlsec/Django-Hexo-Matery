@@ -226,7 +226,7 @@
         xAxis: [
             {
                 type: 'category',
-                data: ["Python","macOS","Hackintosh","神器","黑苹果","CTF","Metasploit","Linux","Android","渗透测试"]
+                data: {{ top10_tags | safe }}
             }
         ],
         yAxis: [
@@ -239,7 +239,7 @@
                 type: 'bar',
                 color: ['#82d3f4'],
                 barWidth : 18,
-                data: [7,7,6,5,5,4,4,4,3,3],
+                data: {{ top10_tags_values | safe }},
                 markPoint: {
                     symbolSize: 45,
                     data: [{

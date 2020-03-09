@@ -126,7 +126,6 @@ class Links(models.Model):
     desc = models.TextField(verbose_name='描述', max_length=250)
     image = models.URLField(default='https://image.3001.net/images/20190330/1553875722169.jpg', verbose_name='头像')
 
-
     def avatar_data(self):
         return format_html(
             '<img src="{}" width="50px" height="50px" style="border-radius: 50%;" />',

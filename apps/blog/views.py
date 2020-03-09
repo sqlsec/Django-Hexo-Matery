@@ -1,6 +1,7 @@
 import random
 import datetime
 import mistune
+from operator import itemgetter
 from django.shortcuts import render
 from django.views.generic.base import View
 from django.conf import settings
@@ -213,19 +214,29 @@ class About(View):
         for i in date_list:
             value_list.append(all_date_list.count(i))
 
-        all_tags = articles.values('tag')
-        all_tag_id = []
-        for i in all_tags:
-            all_tag_id.append(i['tag'])
+        temp_list = []  # 临时集合
+        tags_list = []  # 存放每个标签对应的文章数
+        tags = Tag.objects.all()
+        for tag in tags:
+            temp_list.append(tag.name)
+            temp_list.append(len(tag.article_set.all()))
+            tags_list.append(temp_list)
+            temp_list = []
 
-        for j in all_tag_id:
-            print(Tag.objects.get(id=int(j)))
+        tags_list.sort(key=lambda x: x[1], reverse=True)  # 根据文章数排序
 
+        top10_tags = []
+        top10_tags_values = []
+        for i in tags_list[:10]:
+            top10_tags.append(i[0])
+            top10_tags_values.append(i[1])
 
-        return render(request, 'about.html',{
+        return render(request, 'about.html', {
             'articles': articles,
             'categories': categories,
             'tags': tags,
             'date_list': date_list,
-            'value_list': value_list
+            'value_list': value_list,
+            'top10_tags': top10_tags,
+            'top10_tags_values': top10_tags_values
         })
