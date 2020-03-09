@@ -4,7 +4,6 @@ from django.utils.html import format_html
 from mdeditor.fields import MDTextField
 
 
-
 class Tag(models.Model):
     """
     文章标签
@@ -32,12 +31,20 @@ class Category(models.Model):
     name = models.CharField(max_length=30, verbose_name='分类名称')
     index = models.IntegerField(default=99, verbose_name='分类排序')
     active = models.BooleanField(default=True, verbose_name='是否添加到菜单')
+    icon = models.CharField(max_length=30, default='fa-home',verbose_name='菜单图标')
 
     # 统计文章数 并放入后台
     def get_items(self):
         return len(self.article_set.all())
 
+    def icon_data(self):
+        return format_html(
+            '<i class="{}"></i>',
+            self.icon,
+        )
+
     get_items.short_description = '文章数'
+    icon_data.short_description = '图标预览'
 
     class Meta:
         verbose_name = '分类'

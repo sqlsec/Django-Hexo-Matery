@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load custom_tag %}
+{% block title %}文章标签 | {% endblock %}
 {% block banner %}
 <div class="bg-cover pd-header about-cover">
     {% include 'banner.html' %}
@@ -114,7 +115,7 @@
 
                     <div class="card-action article-tags">
                         {% for tag in  article.tag.all %}
-                        <a href="/tags/%E9%80%86%E5%90%91/">
+                        <a href="{% url 'article_tag' tag.id %}">
                             <span class="chip tag-color">{{ tag }}</span>
                         </a>
                         {% endfor %}

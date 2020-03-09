@@ -15,16 +15,9 @@
                 <a href="mailto:{{ SITE_MAIL }}" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
                     <i class="fas fa-envelope-open"></i>
                 </a>
-                <a href="http://www.sqlsec.com/baidusitemap.xml" class="tooltipped" target="_blank" data-tooltip="网站的SiteMap: http://www.sqlsec.com/baidusitemap.xml" data-position="top" data-delay="50">
-                    <i class="fas fa-sitemap"></i>
-                </a>
                 <a href="/article/" class="tooltipped" target="_blank" data-tooltip="文章更新动态" data-position="top" data-delay="50">
                     <i class="far fa-calendar-alt"></i>
                 </a>
-                <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
-                    <i class="fas fa-rss"></i>
-                </a>
-
             </div>
         </div>
     </div>
@@ -117,7 +110,7 @@
                     </div>
                     <div class="card-action article-tags">
                         {% for tag in  article.tag.all %}
-                        <a href="/tags/Python/">
+                        <a href="{% url 'article_tag' tag.id %}">
                             <span class="chip tag-color">{{ tag }}</span>
                         </a>
                         {% endfor %}

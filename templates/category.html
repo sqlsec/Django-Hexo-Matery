@@ -64,11 +64,11 @@
                 <i class="fas fa-bookmark"></i>&nbsp;&nbsp;文章分类
             </div>
             <div class="tag-chips">
-                {% for i in categorys %}
-                <a href="{% url 'article_category' i.id %}" title="Others: 29">
+                {% for category in categories %}
+                <a href="{% url 'article_category' category.id %}" title="Others: 29">
                     <span class="chip center-align waves-effect waves-light
-                             chip-default category-{% random_num %}">{{ i.name }}
-                        <span class="tag-length">{{ i.article_set.all | length }}</span>
+                             chip-default category-{% random_num %}">{{ category.name }}
+                        <span class="tag-length">{{ category.article_set.all | length }}</span>
                     </span>
                 </a>
                 {% endfor %}
@@ -111,7 +111,7 @@
                     color: '#3C4858'
                 }
             },
-            indicator: [{% for i in categorys %}{"name":"{{ i.name }}","max":25},{% endfor %}],
+            indicator: [{% for category in categories %}{"name":"{{ category.name }}","max":25},{% endfor %}],
             nameGap: 5,
             center: ['50%','55%'],
             radius: '66%'
@@ -122,7 +122,7 @@
             itemStyle: {normal: {areaStyle: {type: 'default'}}},
             data : [
                 {
-                    value : [{% for i in categorys %}{{ i.article_set.all | length }},{% endfor %}],
+                    value : [{% for category in categories %}{{ category.article_set.all | length }},{% endfor %}],
                     name : '文章分类数量'
                 }
             ]

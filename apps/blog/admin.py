@@ -35,9 +35,9 @@ class ArticleAdmin(ImportExportModelAdmin):
 # 分类
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('name', 'index', 'active', 'get_items')
+    list_display = ('name', 'index', 'active', 'get_items', 'icon', 'icon_data')
     search_fields = ('name', )
-    list_editable = ('active',)
+    list_editable = ('active', 'index', 'icon')
     readonly_fields = ('get_items',)
 
 

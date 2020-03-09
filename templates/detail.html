@@ -212,7 +212,7 @@
                             <div class="col s7">
                                 <div class="article-tag">
                                     {% for tag in  article.tag.all %}
-                                    <a href="/tags/Python/">
+                                    <a href="{% url 'article_tag' tag.id %}">
                                         <span class="chip tag-color">{{ tag }}</span>
                                     </a>
                                     {% endfor %}
@@ -221,7 +221,7 @@
                             <div class="col s5 right-align">
                                 <div class="post-cate">
                                     <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                        <a href="/ggs/Others/" class="post-category">
+                                        <a href="{% url 'article_category' article.category_id %}" class="post-category">
                                             {{ article.category }}
                                         </a>
                                 </div>

@@ -44,30 +44,16 @@
                           <span>首页</span>
                         </a>
                     </li>
+
+                    {% for category in active_categories %}
                     <li class="hide-on-med-and-down nav-item">
-                        <a href="/ggs/Web/" class="waves-effect waves-light">
-                          <i class="fab fa-internet-explorer" style="zoom: 0.6;"></i>
-                          <span>Web</span>
+                        <a href="{% url 'article_category' category.id %}" class="waves-effect waves-light">
+                          <i class="{{ category.icon }}" style="zoom: 0.6;"></i>
+                          <span>{{ category.name }}</span>
                         </a>
                     </li>
-                    <li class="hide-on-med-and-down nav-item">
-                        <a href="/ggs/CTF/" class="waves-effect waves-light">
-                          <i class="far fa-flag" style="zoom: 0.6;"></i>
-                          <span>CTF</span>
-                        </a>
-                      </li>
-                    <li class="hide-on-med-and-down nav-item">
-                        <a href="/ggs/Python/" class="waves-effect waves-light">
-                          <i class="fab fa-python" style="zoom: 0.6;"></i>
-                          <span>Python</span>
-                        </a>
-                    </li>
-                    <li class="hide-on-med-and-down nav-item">
-                        <a href="/ggs/Others/" class="waves-effect waves-light">
-                          <i class="fas fa-align-left" style="zoom: 0.6;"></i>
-                          <span>Others</span>
-                        </a>
-                    </li>
+                    {% endfor %}
+
                     <li class="hide-on-med-and-down nav-item">
                         <a href="http://ctf.njupt.edu.cn/members" target="_blank" rel="noopener" class="waves-effect waves-light">
                           <i class="fab fa-xing" style="zoom: 0.6;"></i>
@@ -108,30 +94,15 @@
                                 首页
                             </a>
                         </li>
-                        <li class="m-nav-item">
-                            <a href="/ggs/Web/" class="waves-effect waves-light">
-                                <i class="fa-fw fab fa-internet-explorer"></i>
-                                Web
+
+                        {% for category in active_categories %}
+                            <li class="m-nav-item">
+		                    <a href="{% url 'article_category' category.id %}" class="waves-effect waves-light">
+			                    <i class="fa-fw {{ category.icon }}"></i>
+                                {{ category.name }}
                             </a>
                         </li>
-                        <li class="m-nav-item">
-                            <a href="/ggs/CTF/" class="waves-effect waves-light">
-                                <i class="fa-fw far fa-flag"></i>
-                                CTF
-                            </a>
-                        </li>
-                        <li class="m-nav-item">
-                            <a href="/ggs/Python/" class="waves-effect waves-light">
-                                <i class="fa-fw fab fa-python"></i>
-                                Python
-                            </a>
-                        </li>
-                        <li class="m-nav-item">
-                            <a href="/ggs/Others/" class="waves-effect waves-light">
-                                <i class="fa-fw fas fa-align-left"></i>
-                                Others
-                            </a>
-                        </li>
+                        {% endfor %}
                         <li class="m-nav-item">
                             <a href="http://ctf.njupt.edu.cn/members" target="_blank" rel="noopener" class="waves-effect waves-light">
                                 <i class="fa-fw fab fa-xing"></i>
@@ -257,31 +228,10 @@
         <i class="fas fa-envelope-open"></i>
     </a>
 
-
-
-
-
-    <a href="http://www.sqlsec.com/baidusitemap.xml" class="tooltipped" target="_blank" data-tooltip="网站的SiteMap: http://www.sqlsec.com/baidusitemap.xml" data-position="top" data-delay="50">
-        <i class="fas fa-sitemap"></i>
-    </a>
-
-
-
-
-
-
-
-
-
     <a href="/avs/" class="tooltipped" target="_blank" data-tooltip="文章更新动态" data-position="top" data-delay="50">
         <i class="far fa-calendar-alt"></i>
     </a>
 
-
-
-    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
-        <i class="fas fa-rss"></i>
-    </a>
 
 </div>
     </div>

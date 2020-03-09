@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load custom_tag %}
+{% block title %}文章分类 | {% endblock %}
 {% block banner %}
 <div class="bg-cover pd-header about-cover">
     {% include 'banner.html' %}
@@ -62,11 +63,11 @@
                 <i class="fas fa-bookmark"></i>&nbsp;&nbsp;文章分类
             </div>
             <div class="tag-chips">
-                {% for category in categorys %}
-                <a href="{% url 'article_category' category.id %}" title="{{ category.name }}: {{ category.article_set.all | length }}">
+                {% for i in categories %}
+                <a href="{% url 'article_category' i.id %}" title="{{ i.name }}: {{ i.article_set.all | length }}">
                     <span class="chip center-align waves-effect waves-light
-                             {% ifequal pk category.id %}chip-active{% else %}chip-default{% endifequal %} category-{% random_num %}">{{ category.name }}
-                        <span class="tag-length">{{ category.article_set.all | length }}</span>
+                             {% ifequal pk i.id %}chip-active{% else %}chip-default{% endifequal %} category-{% random_num %}">{{ i.name }}
+                        <span class="tag-length">{{ i.article_set.all | length }}</span>
                     </span>
                 </a>
                 {% endfor %}
@@ -114,7 +115,7 @@
 
                     <div class="card-action article-tags">
                         {% for tag in  article.tag.all %}
-                        <a href="/tags/%E9%80%86%E5%90%91/">
+                        <a href="{% url 'article_tag' tag.id %}">
                             <span class="chip tag-color">{{ tag }}</span>
                         </a>
                         {% endfor %}

@@ -13,6 +13,7 @@ def global_setting(request):
     """
     将settings里面的变量 注册为全局变量
     """
+    active_categories = Category.objects.filter(active=True).order_by('index')
     return {
         'SITE_NAME': settings.SITE_NAME,
         'SITE_DESC': settings.SITE_DESCRIPTION,
@@ -22,7 +23,8 @@ def global_setting(request):
         'SITE_ICP_URL': settings.SITE_ICP_URL,
         'SITE_TITLE': settings.SITE_TITLE,
         'SITE_TYPE_CHINESE': settings.SITE_TYPE_CHINESE,
-        'SITE_TYPE_ENGLISH': settings.SITE_TYPE_ENGLISH
+        'SITE_TYPE_ENGLISH': settings.SITE_TYPE_ENGLISH,
+        'active_categories': active_categories
     }
 
 
@@ -33,7 +35,6 @@ class Index(View):
     def get(self, request):
         all_articles = Article.objects.all().order_by('-add_time')
         top_articles = Article.objects.filter(is_recommend=1)
-
         # 首页分页功能
         try:
             page = request.GET.get('page', 1)
@@ -45,7 +46,7 @@ class Index(View):
 
         return render(request, 'index.html', {
             'all_articles': articles,
-            'top_articles': top_articles
+            'top_articles': top_articles,
         })
 
 
@@ -74,7 +75,7 @@ class Detail(View):
 
         return render(request, 'detail.html', {
             'article': article,
-            'detail_html': output
+            'detail_html': output,
         })
 
 
@@ -123,22 +124,22 @@ class Archive(View):
             'all_articles': articles,
             'date_list': date_list,
             'end': str(end),
-            'begin': str(begin)
+            'begin': str(begin),
         })
 
 
 class CategoryList(View):
     def get(self, request):
-        categorys = Category.objects.all()
+        categories = Category.objects.all()
 
         return render(request, 'category.html', {
-            'categorys': categorys,
+            'categories': categories,
         })
 
 
 class CategoryView(View):
     def get(self, request, pk):
-        categorys = Category.objects.all()
+        categories = Category.objects.all()
         articles = Category.objects.get(id=int(pk)).article_set.all()
 
         try:
@@ -150,7 +151,7 @@ class CategoryView(View):
         articles = p.page(page)
 
         return render(request, 'article_category.html', {
-            'categorys': categorys,
+            'categories': categories,
             'pk': int(pk),
             'articles': articles
         })
@@ -160,7 +161,7 @@ class TagList(View):
     def get(self, request):
         tags = Tag.objects.all()
         return render(request, 'tag.html', {
-            'tags': tags
+            'tags': tags,
         })
 
 
@@ -180,5 +181,51 @@ class TagView(View):
         return render(request, 'article_tag.html', {
             'tags': tags,
             'pk': int(pk),
-            'articles': articles
+            'articles': articles,
+        })
+
+
+class About(View):
+    def get(self, request):
+        articles = Article.objects.all().order_by('-add_time')
+        categories = Category.objects.all()
+        tags = Tag.objects.all()
+
+        all_date = articles.values('add_time')
+
+        latest_date = all_date[0]['add_time']
+        end_year = latest_date.strftime("%Y")
+        end_month = latest_date.strftime("%m")
+        date_list = []
+        for i in range(int(end_month), 13):
+            date = str(int(end_year)-1)+'-'+str(i)
+            date_list.append(date)
+
+        for j in range(1, int(end_month)+1):
+            date = end_year + '-' + str(j)
+            date_list.append(date)
+
+        value_list = []
+        all_date_list = []
+        for i in all_date:
+            all_date_list.append(i['add_time'].strftime("%Y-%m"))
+
+        for i in date_list:
+            value_list.append(all_date_list.count(i))
+
+        all_tags = articles.values('tag')
+        all_tag_id = []
+        for i in all_tags:
+            all_tag_id.append(i['tag'])
+
+        for j in all_tag_id:
+            print(Tag.objects.get(id=int(j)))
+
+
+        return render(request, 'about.html',{
+            'articles': articles,
+            'categories': categories,
+            'tags': tags,
+            'date_list': date_list,
+            'value_list': value_list
         })

@@ -1,0 +1,323 @@
+{% extends 'base.html' %}
+{% load custom_tag %}
+{% block title %}关于我 | {% endblock %}
+
+{% block banner %}
+<div class="bg-cover pd-header about-cover">
+    {% include 'banner.html' %}
+</div>
+{% endblock %}
+{% block contents %}
+    <main class="content" style="min-height: 783px;">
+
+    <div id="aboutme" class="container about-container">
+        <div class="card">
+            <div class="card-content">
+                <div class="row">
+                    <div class="post-statis col l4 hide-on-med-and-down aos-init aos-animate" data-aos="zoom-in-right">
+
+<div class="statis">
+    <span class="count"><a href="{% url 'index' %}">{{ articles | length }}</a></span>
+    <span class="name">文章</span>
+</div>
+
+
+
+<div class="statis">
+    <span class="count"><a href="{% url 'category' %}">{{ categories | length }}</a></span>
+    <span class="name">分类</span>
+</div>
+
+
+
+<div class="statis">
+    <span class="count"><a href="{% url 'tag' %}">{{ tags |length }}</a></span>
+    <span class="name">标签</span>
+</div>
+
+
+                    </div>
+                    <div class="col s12 m12 l4">
+                        <div class="profile center-align">
+                            <div class="avatar">
+                                <img src="https://image.3001.net/images/20171226/15142933784705.png" alt="国光" class="circle responsive-img avatar-img">
+                            </div>
+                            <div class="author">
+                                <div class="post-statis hide-on-large-only aos-init aos-animate" data-aos="zoom-in-right">
+
+<div class="statis">
+    <span class="count"><a href="{% url 'index' %}">{{ articles | length }}</a></span>
+    <span class="name">文章</span>
+</div>
+
+
+
+<div class="statis">
+    <span class="count"><a href="{% url 'category' %}">{{ categories | length }}</a></span>
+    <span class="name">分类</span>
+</div>
+
+
+
+<div class="statis">
+    <span class="count"><a href="{% url 'tag' %}">{{ tags |length }}</a></span>
+    <span class="name">标签</span>
+</div>
+                                </div>
+                                <div class="title">国光</div>
+                                <div class="career">信息安全从业者</div>
+                                <div class="social-link hide-on-large-only aos-init aos-animate" data-aos="zoom-in-left">
+
+
+    <a href="mailto:{{ SITE_MAIL }}" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+    <a href="{% url 'archive' %}" class="tooltipped" target="_blank" data-tooltip="文章更新动态" data-position="top" data-delay="50">
+        <i class="far fa-calendar-alt"></i>
+    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col l4 hide-on-med-and-down aos-init aos-animate" data-aos="zoom-in-left">
+                        <div class="social-link">
+
+
+
+    <a href="mailto:{{ SITE_MAIL }}" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+    <a href="{% url 'archive' %}" class="tooltipped" target="_blank" data-tooltip="文章更新动态" data-position="top" data-delay="50">
+        <i class="far fa-calendar-alt"></i>
+    </a>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="introduction center-align aos-init aos-animate" data-aos="fade-up">白帽子一枚，热爱网络安全，欢迎网络安全技术交流</div>
+
+                <style type="text/css">
+    #posts-chart,
+    #categories-chart,
+    #tags-chart {
+        width: 100%;
+        height: 300px;
+        margin: 0.5rem auto;
+        padding: 0.5rem;
+    }
+</style>
+
+<div id="postCharts" class="post-charts">
+    <div class="title center-align aos-init aos-animate" data-aos="zoom-in-up">
+        <i class="far fa-bar-chart"></i>&nbsp;&nbsp;文章统计图
+    </div>
+    <div class="row">
+        <div class="chart col s12 m6 l4 aos-init aos-animate" data-aos="zoom-in-up">
+            <div id="posts-chart" _echarts_instance_="ec_1583763816723" style="-webkit-tap-highlight-color: transparent; user-select: none; position: relative;"><div style="position: relative; overflow: hidden; width: 341px; height: 286px; padding: 0px; margin: 0px; border-width: 0px;"><canvas data-zr-dom-id="zr_0" width="682" height="572" style="position: absolute; left: 0px; top: 0px; width: 341px; height: 286px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div><div></div></div>
+        </div>
+
+        <div class="chart col s12 m6 l4 aos-init aos-animate" data-aos="zoom-in-up">
+            <div id="categories-chart" _echarts_instance_="ec_1583763816724" style="-webkit-tap-highlight-color: transparent; user-select: none; position: relative;"><div style="position: relative; overflow: hidden; width: 341px; height: 286px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;"><canvas data-zr-dom-id="zr_0" width="682" height="572" style="position: absolute; left: 0px; top: 0px; width: 341px; height: 286px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div><div></div></div>
+        </div>
+
+        <div class="chart col s12 m6 l4 aos-init aos-animate" data-aos="zoom-in-up">
+            <div id="tags-chart" _echarts_instance_="ec_1583763816725" style="-webkit-tap-highlight-color: transparent; user-select: none; position: relative;"><div style="position: relative; overflow: hidden; width: 341px; height: 286px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;"><canvas data-zr-dom-id="zr_0" width="682" height="572" style="position: absolute; left: 0px; top: 0px; width: 341px; height: 286px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div><div style="position: absolute; display: none; border-style: solid; white-space: nowrap; z-index: 9999999; transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0s, top 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0s; background-color: rgba(50, 50, 50, 0.7); border-width: 0px; border-color: rgb(51, 51, 51); border-radius: 4px; color: rgb(255, 255, 255); font: 14px / 21px sans-serif; padding: 5px; left: 136px; top: 240px; pointer-events: none;"><span style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;background-color:#82d3f4;"></span>Hackintosh: 6</div></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://html.sqlsec.com/echarts.min.js"></script>
+<script>
+    let postsChart = echarts.init(document.getElementById('posts-chart'));
+    let categoriesChart = echarts.init(document.getElementById('categories-chart'));
+    let tagsChart = echarts.init(document.getElementById('tags-chart'));
+
+
+
+    let postsOption = {
+        title: {
+            text: '文章发布统计图',
+            top: -5,
+            x: 'center'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        xAxis: {
+            type: 'category',
+            data: {{ date_list | safe }}
+        },
+        yAxis: {
+            type: 'value',
+        },
+        series: [
+            {
+                name: '文章篇数',
+                type: 'line',
+                color: ['#6772e5'],
+                data: {{ value_list |safe }},
+                markPoint: {
+                    symbolSize: 45,
+                    color: ['#fa755a','#3ecf8e','#82d3f4'],
+                    data: [{
+                        type: 'max',
+                        itemStyle: {color: ['#3ecf8e']},
+                        name: '最大值'
+                    }, {
+                        type: 'min',
+                        itemStyle: {color: ['#fa755a']},
+                        name: '最小值'
+                    }]
+                },
+                markLine: {
+                    itemStyle: {color: ['#ab47bc']},
+                    data: [
+                        {type: 'average', name: '平均值'}
+                    ]
+                }
+            }
+        ]
+    };
+
+
+
+    let categoriesOption = {
+        title: {
+            text: '文章分类统计图',
+            top: -4,
+            x: 'center'
+        },
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        series: [
+            {
+                name: '分类',
+                type: 'pie',
+                radius: '50%',
+                color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
+                data: [{% for category in categories %}{"name":"{{ category.name }}","value":{{ category.article_set.all | length  }}},{% endfor %}],
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    };
+
+
+
+    let tagsOption = {
+        title: {
+            text: 'TOP10 标签统计图',
+            top: -5,
+            x: 'center'
+        },
+        tooltip: {},
+        xAxis: [
+            {
+                type: 'category',
+                data: ["Python","macOS","Hackintosh","神器","黑苹果","CTF","Metasploit","Linux","Android","渗透测试"]
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value'
+            }
+        ],
+        series: [
+            {
+                type: 'bar',
+                color: ['#82d3f4'],
+                barWidth : 18,
+                data: [7,7,6,5,5,4,4,4,3,3],
+                markPoint: {
+                    symbolSize: 45,
+                    data: [{
+                        type: 'max',
+                        itemStyle: {color: ['#3ecf8e']},
+                        name: '最大值'
+                    }, {
+                        type: 'min',
+                        itemStyle: {color: ['#fa755a']},
+                        name: '最小值'
+                    }],
+                },
+                markLine: {
+                    itemStyle: {color: ['#ab47bc']},
+                    data: [
+                        {type: 'average', name: '平均值'}
+                    ]
+                }
+            }
+        ]
+    };
+
+    // render the charts
+    postsChart.setOption(postsOption);
+    categoriesChart.setOption(categoriesOption);
+    tagsChart.setOption(tagsOption);
+</script>
+
+
+
+<div class="my-projects">
+    <div class="title center-align aos-init" data-aos="zoom-in-up">
+        <i class="fas fa-gift"></i>&nbsp;&nbsp;我的项目
+    </div>
+    <div class="row">
+
+
+        <div class="col s12 m6 l4 aos-init" data-aos="fade-up">
+            <div class="info center-align">
+                <a href="https://github.com/sqlsec/Django-Hexo-Matery" class="icon" style="background: linear-gradient(to bottom right, #66BB6A 0%, #81C784 100%)" target="_blank">
+                    <i class="fab fa-python"></i>
+                </a>
+                <div class="info-title">
+                    <a href="https://github.com/sqlsec/Django-Hexo-Matery" target="_blank">Django-Hexo-Matery</a>
+                </div>
+                <div class="info-desc">使用Django3完全重写了我的这个Hexo博客</div>
+            </div>
+        </div>
+
+        <div class="col s12 m6 l4 aos-init" data-aos="fade-up">
+            <div class="info center-align">
+                <a href="https://github.com/sqlsec/B360M-DS3H-I5-9600KF-RX580-CLOVER" class="icon" style="background: linear-gradient(to bottom right, #F06292 0%, #EF5350 100%)" target="_blank">
+                    <i class="fab fa-apple"></i>
+                </a>
+                <div class="info-title">
+                    <a href="https://github.com/sqlsec/B360M-DS3H-I5-9600KF-RX580-CLOVER" target="_blank">B360M-DS3H-I5-9600KF-RX580</a>
+                </div>
+                <div class="info-desc">我的台式机的黑苹果99%完美的Clover驱动配置</div>
+            </div>
+        </div>
+
+        <div class="col s12 m6 l4 aos-init" data-aos="fade-up">
+            <div class="info center-align">
+                <a href="https://github.com/sqlsec" class="icon" style="background: linear-gradient(to bottom right, #29B6F6 0%, #1E88E5 100%)" target="_blank">
+                    <i class="fas fa-paperclip"></i>
+                </a>
+                <div class="info-title">
+                    <a href="https://github.com/sqlsec" target="_blank">Django 漏扫 ing</a>
+                </div>
+                <div class="info-desc">立个Flag Django 漏扫问题不大 等我好消息</div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

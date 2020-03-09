@@ -3,7 +3,7 @@ from django.urls import path, re_path, include
 from django.conf.urls.static import static
 from django.conf import settings
 
-from blog.views import Index, Friends, Detail, Archive, CategoryList, CategoryView, TagList, TagView
+from blog.views import Index, Friends, Detail, Archive, CategoryList, CategoryView, TagList, TagView, About
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -34,6 +34,9 @@ urlpatterns = [
 
     # 文章标签
     re_path(r'tag/tg(?P<pk>\d+)', TagView.as_view(), name='article_tag'),
+
+    # 关于本站
+    path('about/', About.as_view(),name='about')
 ]
 
 # 设置后台名称
