@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
+{% block title %}分类统计 | {% endblock %}
 {% load custom_tag %}
+{% load static %}
 {% block banner %}
 <div class="bg-cover pd-header about-cover">
     {% include 'banner.html' %}
@@ -63,7 +65,7 @@
             </div>
             <div class="tag-chips">
                 {% for i in categorys %}
-                <a href="/ggs/Others/" title="Others: 29">
+                <a href="{% url 'article_category' i.id %}" title="Others: 29">
                     <span class="chip center-align waves-effect waves-light
                              chip-default category-{% random_num %}">{{ i.name }}
                         <span class="tag-length">{{ i.article_set.all | length }}</span>
@@ -89,11 +91,9 @@
     </div>
 </div>
 
-<script type="text/javascript" src="https://html.sqlsec.com/echarts.min.js"></script>
+<script type="text/javascript" src="{% static 'js/echarts.min.js' %}"></script>
 <script type="text/javascript">
     let radarChart = echarts.init(document.getElementById('category-radar'));
-
-
 
     let option = {
         title: {

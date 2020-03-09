@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% block title %}标签统计 | {% endblock %}
+{% load custom_tag %}
+{% load static %}
+{% block banner %}
+<div class="bg-cover pd-header about-cover">
+    {% include 'banner.html' %}
+</div>
+{% endblock %}
+
+{% block custom_style%}
+    <style>
+        .tag-1{
+            background-color: #F9EBEA;
+        }
+
+        .tagy-2{
+            background-color: #F5EEF8;
+        }
+
+        .tag-3{
+            background-color: #D5F5E3;
+        }
+
+        .tag-4{
+            background-color: #E8F8F5;
+        }
+        .tag-5{
+            background-color: #ddf9e7;
+        }
+
+        .tag-6{
+            background-color: #d2d6f8;
+        }
+
+        .tag-7{
+            background-color: #f5deba;
+        }
+
+        .tag-8{
+            background-color: #f8f6c8;
+        }
+
+        .tag-9{
+            background-color: #d8f5c1;
+        }
+
+        .tagy-10{
+            background-color: #def8f8;
+        }
+
+    </style>
+{% endblock %}
+
+{% block contents %}
+<main class="content" style="min-height: 783px;">
+<div id="tags" class="container chip-container">
+    <div class="card">
+        <div class="card-content">
+            <div class="tag-title center-align">
+                <i class="fas fa-tags"></i>&nbsp;&nbsp;文章标签
+            </div>
+            <div class="tag-chips">
+                {% for tag in tags %}
+                    <a href="/tags/%E5%BB%BA%E7%AB%99/" title="{{ tag.name }}: {{ tag.article_set.all | length }}">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default tag-{% random_num %}" data-tagname="{{ tag.name }}">{{ tag.name }}
+                        <span class="tag-length">{{ tag.article_set.all | length }}</span>
+                    </span>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/jqcloud.css' %}">
+<style type="text/css">
+    #tag-wordcloud {
+        width: 100%;
+        height: 300px;
+    }
+</style>
+
+<div class="container aos-init" data-aos="fade-up">
+    <div class="card">
+        <div id="tag-wordcloud" class="card-content jqcloud" style="width: 1125px; height: 300px;"></div>
+    </div>
+</div>
+
+<script type="text/javascript" src="{% static 'js/jqcloud-1.0.4.min.js' %}"></script>
+<script type="text/javascript">
+    $('#tag-wordcloud').jQCloud([{% for tag in tags %}
+    {"text":"{{ tag.name }}","weight":{{ tag.article_set.all |length }},"link":"#"},
+    {% endfor %}], {
+        autoResize: true
+    });
+</script>
+
+
+</main>
+{% endblock %}

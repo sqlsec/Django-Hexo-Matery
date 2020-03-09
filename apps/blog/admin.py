@@ -14,6 +14,7 @@ class ArticleAdmin(ImportExportModelAdmin):
     list_filter = ('category', 'tag', 'add_time')
     list_editable = ('category', 'is_recommend')
     readonly_fields = ('cover_admin', )
+    list_per_page = 15
 
     fieldsets = (
         ('编辑文章', {
@@ -34,15 +35,19 @@ class ArticleAdmin(ImportExportModelAdmin):
 # 分类
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('name', 'index')
+    list_display = ('name', 'index', 'active', 'get_items')
     search_fields = ('name', )
+    list_editable = ('active',)
+    readonly_fields = ('get_items',)
 
 
 # 标签
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
-    list_display = ('name', )
+    list_display = ('name', 'get_items')
     search_fields = ('name', )
+    readonly_fields = ('get_items',)
+    list_per_page = 20
 
 
 # 评论

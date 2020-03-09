@@ -11,6 +11,12 @@ class Tag(models.Model):
     """
     name = models.CharField(max_length=30, verbose_name='标签名称')
 
+    # 统计文章数 并放入后台
+    def get_items(self):
+        return len(self.article_set.all())
+
+    get_items.short_description = '文章数'
+
     class Meta:
         verbose_name = '标签'
         verbose_name_plural = verbose_name
@@ -25,6 +31,13 @@ class Category(models.Model):
     """
     name = models.CharField(max_length=30, verbose_name='分类名称')
     index = models.IntegerField(default=99, verbose_name='分类排序')
+    active = models.BooleanField(default=True, verbose_name='是否添加到菜单')
+
+    # 统计文章数 并放入后台
+    def get_items(self):
+        return len(self.article_set.all())
+
+    get_items.short_description = '文章数'
 
     class Meta:
         verbose_name = '分类'

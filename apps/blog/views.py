@@ -127,7 +127,7 @@ class Archive(View):
         })
 
 
-class Category_List(View):
+class CategoryList(View):
     def get(self, request):
         categorys = Category.objects.all()
 
@@ -140,7 +140,7 @@ class CategoryView(View):
     def get(self, request, pk):
         categorys = Category.objects.all()
         articles = Category.objects.get(id=int(pk)).article_set.all()
-        # 首页分页功能
+
         try:
             page = request.GET.get('page', 1)
         except PageNotAnInteger:
@@ -151,6 +151,34 @@ class CategoryView(View):
 
         return render(request, 'article_category.html', {
             'categorys': categorys,
+            'pk': int(pk),
+            'articles': articles
+        })
+
+
+class TagList(View):
+    def get(self, request):
+        tags = Tag.objects.all()
+        return render(request, 'tag.html', {
+            'tags': tags
+        })
+
+
+class TagView(View):
+    def get(self, request, pk):
+        tags = Tag.objects.all()
+        articles = Tag.objects.get(id=int(pk)).article_set.all()
+
+        try:
+            page = request.GET.get('page', 1)
+        except PageNotAnInteger:
+            page = 1
+
+        p = Paginator(articles, 9, request=request)
+        articles = p.page(page)
+
+        return render(request, 'article_tag.html', {
+            'tags': tags,
             'pk': int(pk),
             'articles': articles
         })

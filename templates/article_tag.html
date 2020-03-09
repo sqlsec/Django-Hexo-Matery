@@ -8,42 +8,42 @@
 
 {% block custom_style%}
     <style>
-        .category-1{
+        .tag-1{
             background-color: #F9EBEA;
         }
 
-        .category-2{
+        .tagy-2{
             background-color: #F5EEF8;
         }
 
-        .category-3{
+        .tag-3{
             background-color: #D5F5E3;
         }
 
-        .category-4{
+        .tag-4{
             background-color: #E8F8F5;
         }
-        .category-5{
+        .tag-5{
             background-color: #ddf9e7;
         }
 
-        .category-6{
+        .tag-6{
             background-color: #d2d6f8;
         }
 
-        .category-7{
+        .tag-7{
             background-color: #f5deba;
         }
 
-        .category-8{
+        .tag-8{
             background-color: #f8f6c8;
         }
 
-        .category-9{
+        .tag-9{
             background-color: #d8f5c1;
         }
 
-        .category-10{
+        .tagy-10{
             background-color: #def8f8;
         }
 
@@ -51,22 +51,22 @@
 {% endblock %}
 
 {% block contents %}
-<main class="content" style="min-height: 783px;">
+<main class="content" style="min-height: 734px;">
 
 
 
-<div id="category-cloud" class="container chip-container">
+<div id="tags" class="container chip-container">
     <div class="card">
         <div class="card-content">
             <div class="tag-title center-align">
-                <i class="fas fa-bookmark"></i>&nbsp;&nbsp;文章分类
+                <i class="fas fa-tags"></i>&nbsp;&nbsp;文章标签
             </div>
             <div class="tag-chips">
-                {% for category in categorys %}
-                <a href="{% url 'article_category' category.id %}" title="{{ category.name }}: {{ category.article_set.all | length }}">
+                {% for tag in tags %}
+                <a href="{% url 'article_tag' tag.id %}" title="{{ tag.name }}: {{ tag.article_set.all | length }}">
                     <span class="chip center-align waves-effect waves-light
-                             {% ifequal pk category.id %}chip-active{% else %}chip-default{% endifequal %} category-{% random_num %}">{{ category.name }}
-                        <span class="tag-length">{{ category.article_set.all | length }}</span>
+                             {% ifequal pk tag.id %}chip-active{% else %}chip-default{% endifequal %} tag-{% random_num %}" data-tagname="{{ tag.name }}">{{ tag.name }}
+                        <span class="tag-length">{{ tag.article_set.all | length }}</span>
                     </span>
                 </a>
                 {% endfor %}
@@ -77,7 +77,7 @@
 
 
 
-    <article id="articles" class="container articles" style="position: relative; height: 2816px;">
+    <article id="articles" class="container articles" style="position: relative; height: 1734px;">
         <div class="row tags-posts">
             {% for article in articles.object_list %}
                 <div class="article tag-post col s12 m6 l4 aos-init" data-aos="zoom-in" style="position: absolute; left: 0px; top: 2411px;">
