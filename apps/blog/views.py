@@ -130,13 +130,27 @@ class Archive(View):
 class Category_List(View):
     def get(self, request):
         categorys = Category.objects.all()
-        nums_list = []
-        for i in categorys:
-            nums_list.append(len(i.article_set.all()))
-
-        nums_list.sort(reverse=True)
 
         return render(request, 'category.html', {
             'categorys': categorys,
-            'nums_list': nums_list
+        })
+
+
+class CategoryView(View):
+    def get(self, request, pk):
+        categorys = Category.objects.all()
+        articles = Category.objects.get(id=int(pk)).article_set.all()
+        # 首页分页功能
+        try:
+            page = request.GET.get('page', 1)
+        except PageNotAnInteger:
+            page = 1
+
+        p = Paginator(articles, 9, request=request)
+        articles = p.page(page)
+
+        return render(request, 'article_category.html', {
+            'categorys': categorys,
+            'pk': int(pk),
+            'articles': articles
         })

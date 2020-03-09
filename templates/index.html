@@ -18,7 +18,7 @@
                 <a href="http://www.sqlsec.com/baidusitemap.xml" class="tooltipped" target="_blank" data-tooltip="网站的SiteMap: http://www.sqlsec.com/baidusitemap.xml" data-position="top" data-delay="50">
                     <i class="fas fa-sitemap"></i>
                 </a>
-                <a href="/avs/" class="tooltipped" target="_blank" data-tooltip="文章更新动态" data-position="top" data-delay="50">
+                <a href="/article/" class="tooltipped" target="_blank" data-tooltip="文章更新动态" data-position="top" data-delay="50">
                     <i class="far fa-calendar-alt"></i>
                 </a>
                 <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
@@ -63,7 +63,7 @@
                                 <div class="post-body">
                                     <div class="post-categories">
 
-                                    <a href="/ggs/Web/" class="category">{{ i.category }}</a>
+                                    <a href="{% url 'article_category' i.category_id %}" class="category">{{ i.category }}</a>
 
                                 </div>
                                     <a href="{% url 'detail' i.id %}">
@@ -109,7 +109,7 @@
                             </span>
                             <span class="publish-author">
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                <a href="/ggs/Python/" class="post-category">
+                                <a href="{% url 'article_category' article.category_id %}" class="post-category">
                                     {{ article.category }}
                                 </a>
                             </span>
