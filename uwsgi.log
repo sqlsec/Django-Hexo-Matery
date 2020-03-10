@@ -1,0 +1,40 @@
+*** Starting uWSGI 2.0.18 (64bit) on [Tue Mar 10 08:44:24 2020] ***
+compiled with version: 4.2.1 Compatible Apple LLVM 11.0.0 (clang-1100.0.33.8) on 10 March 2020 00:34:29
+os: Darwin-19.3.0 Darwin Kernel Version 19.3.0: Thu Jan  9 20:58:23 PST 2020; root:xnu-6153.81.5~1/RELEASE_X86_64
+nodename: com
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 12
+current working directory: /Users/sqlsec/Documents/Github/Django-Hexo-Matery
+writing pidfile to uwsgi.pid
+detected binary path: /Users/sqlsec/.pyenv/versions/pypy3.6-7.3.0/bin/uwsgi
+chdir() to /Users/sqlsec/Documents/Github/Django-Hexo-Matery
+your processes number limit is 2784
+your memory page size is 4096 bytes
+detected max file descriptor number: 10240
+lock engine: OSX spinlocks
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on 127.0.0.1:8080 fd 4
+uwsgi socket 0 bound to TCP address 127.0.0.1:60770 (port auto-assigned) fd 3
+unable to load pypy library: dlopen(libpypy-c.dylib, 10): image not found
+*** Starting uWSGI 2.0.18 (64bit) on [Tue Mar 10 08:47:14 2020] ***
+compiled with version: 4.2.1 Compatible Apple LLVM 11.0.0 (clang-1100.0.33.8) on 10 March 2020 00:34:29
+os: Darwin-19.3.0 Darwin Kernel Version 19.3.0: Thu Jan  9 20:58:23 PST 2020; root:xnu-6153.81.5~1/RELEASE_X86_64
+nodename: com
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 12
+current working directory: /Users/sqlsec/Documents/Github/Django-Hexo-Matery
+writing pidfile to uwsgi.pid
+detected binary path: /Users/sqlsec/.pyenv/versions/pypy3.6-7.3.0/bin/uwsgi
+chdir() to /Users/sqlsec/Documents/Github/Django-Hexo-Matery
+your processes number limit is 2784
+your memory page size is 4096 bytes
+detected max file descriptor number: 10240
+lock engine: OSX spinlocks
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on 127.0.0.1:8080 fd 4
+uwsgi socket 0 bound to TCP address 127.0.0.1:61700 (port auto-assigned) fd 3
+unable to load pypy library: dlopen(libpypy-c.dylib, 10): image not found

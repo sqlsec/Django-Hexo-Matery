@@ -7,9 +7,9 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 
 SECRET_KEY = '_=po3tapr+1rd)bdvu#_!mg4z3%%g^xm4puyb1-!gxlxom7ke8'
 
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # APP注册相关
 INSTALLED_APPS = [
@@ -97,9 +97,44 @@ USE_L10N = True
 
 USE_TZ = True
 
+# 日志记录
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format' :"[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+            'datefmt' :"%d/%b/%Y %H:%M:%S"
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'mysite.log',
+            'formatter': 'verbose'
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'propagate': True,
+            'level': 'DEBUG',
+        },
+        'blog': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+        },
+    }
+}
+
 # 静态文件配置
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [(os.path.join(BASE_DIR, 'static'))]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATICFILES_DIRS = [(os.path.join(BASE_DIR, 'static'))]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 MEDIA_URL = '/media/'

@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path, re_path, include
 from django.conf.urls.static import static
 from django.conf import settings
+from django.views import static
 
 from blog.views import Index, Friends, Detail, Archive, CategoryList, CategoryView, TagList, TagView, About
 
@@ -36,7 +37,10 @@ urlpatterns = [
     re_path(r'tag/tg(?P<pk>\d+)', TagView.as_view(), name='article_tag'),
 
     # 关于本站
-    path('about/', About.as_view(),name='about')
+    path('about/', About.as_view(),name='about'),
+
+    # 静态文件
+    re_path(r'^static/(?P<path>.*)$', static.serve, {'document_root': settings.STATIC_ROOT }, name='static')
 ]
 
 # 设置后台名称
