@@ -215,3 +215,10 @@ $ pip install django-simpleui
 - [ ] 文章按照月份归档功能
 - [ ] 缓存加速
 - [ ] 网站部署文档
+
+本博客还有很多没有完善的，没想到开源后有网友在次基础上继续完善了本项目，很多功能都添加了上去。
+
+具体效果可以参考：[廊桥村博客](http://time.pings.fun/)
+
+这位网友的 Github 项目地址是：[https://github.com/pingszi/my_blog](https://github.com/pingszi/my_blog)
+感兴趣的朋友可以参考试试看
