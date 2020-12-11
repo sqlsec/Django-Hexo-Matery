@@ -218,7 +218,13 @@ $ pip install django-simpleui
 
 本博客还有很多没有完善的，没想到开源后有网友在次基础上继续完善了本项目，很多功能都添加了上去。
 
-具体效果可以参考：[廊桥村博客](http://time.pings.fun/)
+具体效果可以参考：
 
-这位网友的 Github 项目地址是：[https://github.com/pingszi/my_blog](https://github.com/pingszi/my_blog)
-感兴趣的朋友可以参考试试看
+网友 pingszi 的修改效果：
+[廊桥村博客](http://time.pings.fun/)  
+项目地址是：[https://github.com/pingszi/my_blog](https://github.com/pingszi/my_blog)
+
+网友 CharmCode 的修改效果：
+[CharmCode](https://www.charmcode.cn/)  
+项目地址 [https://github.com/CoderCharm/djangoBlog](https://github.com/CoderCharm/djangoBlog)
+
